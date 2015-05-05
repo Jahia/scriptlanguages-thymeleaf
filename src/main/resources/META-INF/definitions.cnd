@@ -1,0 +1,2 @@
+[jnt:thymeleafNode] > jnt:content, mix:title, jmix:basicContent
+- thymeleafText (string) i18n
