@@ -30,6 +30,19 @@ with the following content :
 As you can see this will simply display the node property as well as display a message coming from the module's resource
 bundle file located in src/main/resources/resources/scriptlanguages-thymeleaf.properties.
 
+## Custom dialects
+
+There is initial support for additional dialects implemented in other modules. In order for these to be recognized,
+they must be registered as OSGi services using the org.thymeleaf.dialect.IDialect interface. Here is an example using
+a Spring descriptor file.
+
+    <bean id="MyCustomThymeLeafDialect" class="com.foo.MyCustomThymeLeafDialect" />
+
+    <osgi:service id="MyCustomThymeLeafDialectOsgiService" ref="MyCustomThymeLeafDialect"
+                  interface="org.thymeleaf.dialect.IDialect"/>
+
+Note : this hasn't been fully tested yet, so testing and feedback on this feature is welcome !
+
 ## TODO
 - Remove all hacks by modifying Jahia core to enable dynamic deployment of new scripting language support
 - Make it possible for other modules to deploy Thymeleaf templates (probably requires changes in Jahia core or
