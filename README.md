@@ -30,15 +30,10 @@ with the following content :
 As you can see this will simply display the node property as well as display a message coming from the module's resource
 bundle file located in src/main/resources/resources/scriptlanguages-thymeleaf.properties.
 
-## Limitations
-- Currently only this module can contain Thymeleaf templates. If they are added in other modules they will not be
-detected by the engine
-
 ## TODO
 - Remove all hacks by modifying Jahia core to enable dynamic deployment of new scripting language support
 - Make it possible for other modules to deploy Thymeleaf templates (probably requires changes in Jahia core or
   implementing a custom bundle extender).
-- Add support for custom dialects (generally in seperate modules), possibly requiring a bundle extender of some kind
 - Remove hack to access localization context in ThymeLeafMessageResolver
 - Test and improve overall performance, as not much caching is present
 - Test, test, test :)

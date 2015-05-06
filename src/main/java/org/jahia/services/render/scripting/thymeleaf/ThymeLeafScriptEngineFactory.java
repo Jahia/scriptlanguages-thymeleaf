@@ -2,12 +2,13 @@ package org.jahia.services.render.scripting.thymeleaf;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.dialect.IDialect;
+import org.thymeleaf.messageresolver.IMessageResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineFactory;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by loom on 04.05.15.
@@ -15,7 +16,7 @@ import java.util.List;
 public class ThymeLeafScriptEngineFactory implements ScriptEngineFactory, InitializingBean {
 
     TemplateEngine templateEngine;
-    ThymeLeafResourceResolver thymeLeafResourceResolver;
+    ThymeLeafResourceResolver thymeLeafResourceResolver =  new ThymeLeafResourceResolver();
 
     private List<String> extensions = new ArrayList<String>();
     private List<String> names = new ArrayList<String>();
@@ -24,6 +25,11 @@ public class ThymeLeafScriptEngineFactory implements ScriptEngineFactory, Initia
     private String engineVersion = "1.0";
     private String languageName = "thymeleaf";
     private String languageVersion = "2.1.4.RELEASE";
+    private Long templateCacheTTL = 3600000L;
+    private String templateMode = "XHTML";
+    private TemplateResolver templateResolver = new TemplateResolver();
+    private IMessageResolver messageResolver = new ThymeLeafMessageResolver();
+    private Map<String,IDialect> additionalDialects = new HashMap<String,IDialect>();
 
     public ThymeLeafScriptEngineFactory() {
         extensions.add("html");
@@ -56,6 +62,62 @@ public class ThymeLeafScriptEngineFactory implements ScriptEngineFactory, Initia
 
     public void setLanguageVersion(String languageVersion) {
         this.languageVersion = languageVersion;
+    }
+
+    public void setTemplateEngine(TemplateEngine templateEngine) {
+        this.templateEngine = templateEngine;
+    }
+
+    public void setThymeLeafResourceResolver(ThymeLeafResourceResolver thymeLeafResourceResolver) {
+        this.thymeLeafResourceResolver = thymeLeafResourceResolver;
+    }
+
+    public void setTemplateCacheTTL(Long templateCacheTTL) {
+        this.templateCacheTTL = templateCacheTTL;
+    }
+
+    public void setTemplateMode(String templateMode) {
+        this.templateMode = templateMode;
+    }
+
+    public void setTemplateResolver(TemplateResolver templateResolver) {
+        this.templateResolver = templateResolver;
+    }
+
+    public void setMessageResolver(IMessageResolver messageResolver) {
+        this.messageResolver = messageResolver;
+    }
+
+    public void setAdditionalDialects(Map<String, IDialect> additionalDialects) {
+        this.additionalDialects = additionalDialects;
+    }
+
+    public TemplateEngine getTemplateEngine() {
+        return templateEngine;
+    }
+
+    public ThymeLeafResourceResolver getThymeLeafResourceResolver() {
+        return thymeLeafResourceResolver;
+    }
+
+    public Long getTemplateCacheTTL() {
+        return templateCacheTTL;
+    }
+
+    public String getTemplateMode() {
+        return templateMode;
+    }
+
+    public TemplateResolver getTemplateResolver() {
+        return templateResolver;
+    }
+
+    public IMessageResolver getMessageResolver() {
+        return messageResolver;
+    }
+
+    public Map<String, IDialect> getAdditionalDialects() {
+        return additionalDialects;
     }
 
     @Override
@@ -123,19 +185,21 @@ public class ThymeLeafScriptEngineFactory implements ScriptEngineFactory, Initia
         return new ThymeLeafScriptEngine(this, templateEngine, thymeLeafResourceResolver);
     }
 
-    private void initializeTemplateEngine() {
+    public void initializeTemplateEngine() {
 
-        TemplateResolver templateResolver =
-                new TemplateResolver();
-        thymeLeafResourceResolver = new ThymeLeafResourceResolver();
         templateResolver.setResourceResolver(thymeLeafResourceResolver);
         // XHTML is the default mode, but we set it anyway for better understanding of code
-        templateResolver.setTemplateMode("XHTML");
+        templateResolver.setTemplateMode(templateMode);
         // Template cache TTL=1h. If not set, entries would be cached until expelled by LRU
-        templateResolver.setCacheTTLMs(3600000L);
+        templateResolver.setCacheTTLMs(templateCacheTTL);
 
         templateEngine = new TemplateEngine();
-        templateEngine.setMessageResolver(new ThymeLeafMessageResolver());
+        if (additionalDialects.size() > 0) {
+            for (IDialect additionalDialect : additionalDialects.values()) {
+                templateEngine.addDialect(additionalDialect);
+            }
+        }
+        templateEngine.setMessageResolver(messageResolver);
         templateEngine.setTemplateResolver(templateResolver);
 
     }

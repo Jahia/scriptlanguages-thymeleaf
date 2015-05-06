@@ -9,7 +9,7 @@
 
     <bean id="scriptEngineFactory" class="org.jahia.services.render.scripting.thymeleaf.ThymeLeafScriptEngineFactory" />
 
-    <bean id="scriptEngineFactoryInitializer" class="org.jahia.services.render.scripting.thymeleaf.ScriptEngineFactoryInitializer">
+    <bean id="scriptEngineFactoryInitializer" class="org.jahia.services.render.scripting.thymeleaf.Activator">
         <property name="scriptEngineFactory" ref="scriptEngineFactory" />
         <property name="bundleScriptResolver" ref="BundleScriptResolver" />
         <property name="bundleJSR223ScriptFactory" ref="BundleJSR223ScriptFactory" />
