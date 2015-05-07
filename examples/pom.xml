@@ -40,7 +40,7 @@
         <groupId>org.jahia.modules</groupId>
         <version>2.0-SNAPSHOT</version>
     </parent>
-    <artifactId>scriptlanguages-thymeleaf-example</artifactId>
+    <artifactId>scriptlanguages-thymeleaf-examples</artifactId>
     <name>Thymeleaf Script Language integration example module</name>
     <packaging>bundle</packaging>
     <description>This module provides examples of usage of the Thymeleaf language as a scripting language for Jahia</description>

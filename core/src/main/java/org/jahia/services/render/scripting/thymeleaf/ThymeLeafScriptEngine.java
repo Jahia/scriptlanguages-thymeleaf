@@ -38,6 +38,11 @@ public class ThymeLeafScriptEngine extends AbstractScriptEngine {
         String templateName = "template-" + invocationCounts + System.currentTimeMillis();
         thymeLeafResourceResolver.putScript(templateName, script);
         String result = templateEngine.process(templateName, templateContext);
+        try {
+            context.getWriter().append(result);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         thymeLeafResourceResolver.removeScript(templateName);
         return result;
     }
