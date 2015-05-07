@@ -124,7 +124,7 @@ public class Activator implements InitializingBean, BundleContextAware, Disposab
             @Override
             public void removedService(ServiceReference reference, IDialect service) {
                 if (service != null) {
-                    ((ThymeLeafScriptEngineFactory) scriptEngineFactory).getAdditionalDialects().put(service.getPrefix(), service);
+                    ((ThymeLeafScriptEngineFactory) scriptEngineFactory).getAdditionalDialects().remove(service.getPrefix());
                 }
                 ((ThymeLeafScriptEngineFactory)scriptEngineFactory).initializeTemplateEngine();
             }
