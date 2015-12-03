@@ -11,12 +11,12 @@ import java.io.Reader;
 /**
  * Created by loom on 04.05.15.
  */
-public class ThymeLeafScriptEngine extends AbstractScriptEngine {
+class ThymeLeafScriptEngine extends AbstractScriptEngine {
 
-    ThymeLeafScriptEngineFactory factory;
-    TemplateEngine templateEngine;
-    ThymeLeafResourceResolver thymeLeafResourceResolver;
-    static long invocationCounts = 0;
+    private ThymeLeafScriptEngineFactory factory;
+    private TemplateEngine templateEngine;
+    private ThymeLeafResourceResolver thymeLeafResourceResolver;
+    private static long invocationCounts = 0;
 
     public ThymeLeafScriptEngine(ThymeLeafScriptEngineFactory factory, TemplateEngine templateEngine, ThymeLeafResourceResolver thymeLeafResourceResolver) {
         this.factory = factory;

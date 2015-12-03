@@ -38,7 +38,7 @@
     <parent>
         <artifactId>jahia-modules</artifactId>
         <groupId>org.jahia.modules</groupId>
-        <version>7.0.0.0</version>
+        <version>7.2.0.0-SNAPSHOT</version>
     </parent>
     <artifactId>scriptlanguages-thymeleaf-root</artifactId>
     <name>Thymeleaf Script Language integration root project</name>
@@ -86,52 +86,6 @@
 
         <pluginManagement>
         <plugins>
-            <plugin>
-                <!-- Remove this plugin when this module is updated for Jahia 7.1 -->
-                <groupId>org.jahia.server</groupId>
-                <artifactId>jahia-maven-plugin</artifactId>
-                <version>4.4</version>
-                <executions>
-                    <execution>
-                        <id>jahia-version</id>
-                        <goals>
-                            <goal>jahia-version</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>native2ascii</id>
-                        <goals>
-                            <goal>native2ascii</goal>
-                        </goals>
-                        <configuration>
-                            <includes>resources/*.properties</includes>
-                            <defaultPropertiesFileLocale>en</defaultPropertiesFileLocale>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>package-imports</id>
-                        <goals>
-                            <goal>package-imports</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>prepare-package-dependencies</id>
-                        <goals>
-                            <goal>dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <contentDefinitionCapabilitiesActivated>true</contentDefinitionCapabilitiesActivated>
-                        </configuration>
-                        <phase>prepare-package</phase>
-                    </execution>
-                    <execution>
-                        <id>verify-package-dependencies</id>
-                        <goals>
-                            <goal>check-dependencies</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
