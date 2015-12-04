@@ -30,9 +30,13 @@ public class ThymeLeafScriptEngineFactory implements ScriptEngineFactory {
     private Map<String, IDialect> additionalDialects = new HashMap<>();
 
     public ThymeLeafScriptEngineFactory() {
+        templateResolver.setResourceResolver(thymeLeafResourceResolver);
+        // XHTML is the default mode, but we set it anyway for better understanding of code
+        templateResolver.setTemplateMode(templateMode);
+        // Template cache TTL=1h. If not set, entries would be cached until expelled by LRU
+        templateResolver.setCacheTTLMs(templateCacheTTL);
+
         initializeTemplateEngine();
-
-
     }
 
     @Override
@@ -96,13 +100,6 @@ public class ThymeLeafScriptEngineFactory implements ScriptEngineFactory {
     }
 
     void initializeTemplateEngine() {
-
-        templateResolver.setResourceResolver(thymeLeafResourceResolver);
-        // XHTML is the default mode, but we set it anyway for better understanding of code
-        templateResolver.setTemplateMode(templateMode);
-        // Template cache TTL=1h. If not set, entries would be cached until expelled by LRU
-        templateResolver.setCacheTTLMs(templateCacheTTL);
-
         templateEngine = new TemplateEngine();
         if (additionalDialects.size() > 0) {
             for (IDialect additionalDialect : additionalDialects.values()) {
