@@ -89,11 +89,6 @@
     <build>
         <plugins>
             <plugin>
-                <!-- Remove this plugin when this module is updated for Jahia 7.1 -->
-                <groupId>org.jahia.server</groupId>
-                <artifactId>jahia-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <extensions>true</extensions>
