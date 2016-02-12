@@ -1,5 +1,6 @@
-package org.jahia.services.render.scripting.thymeleaf.examples.dialect;
+package org.jahia.services.render.scripting.thymeleaf.support.dialect;
 
+import org.jahia.services.render.scripting.thymeleaf.support.template.NodeAttrProcessor;
 import org.thymeleaf.dialect.AbstractDialect;
 import org.thymeleaf.processor.IProcessor;
 
@@ -31,6 +32,7 @@ public class HelloDialect extends AbstractDialect {
     public Set<IProcessor> getProcessors() {
         final Set<IProcessor> processors = new HashSet<IProcessor>();
         processors.add(new SayToAttrProcessor());
+        processors.add(new NodeAttrProcessor());
         return processors;
     }
 

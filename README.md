@@ -53,7 +53,7 @@ a Spring descriptor file.
            http://www.springframework.org/schema/osgi
            http://www.springframework.org/schema/osgi/spring-osgi.xsd">
 
-        <bean id="helloThymeleafDialect" class="org.jahia.services.render.scripting.thymeleaf.examples.dialect.HelloDialect" />
+        <bean id="helloThymeleafDialect" class="org.jahia.services.render.scripting.thymeleaf.support.dialect.HelloDialect" />
 
         <osgi:service id="helloThymeleafDialectOsgiService" ref="helloThymeleafDialect" interface="org.thymeleaf.dialect.IDialect" />
 

@@ -93,7 +93,10 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package>org.thymeleaf.*</Export-Package>
+                        <Export-Package>
+                            org.jahia.services.render.scripting.thymeleaf,
+                            org.thymeleaf.*
+                        </Export-Package>
                     </instructions>
                 </configuration>
             </plugin>

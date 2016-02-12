@@ -1,7 +1,12 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <div xmlns="http://www.w3.org/1999/xhtml"
-   xmlns:th="http://www.thymeleaf.org" xmlns:hello="http://www.jahia.com/thymeleaf/hello">
+   xmlns:th="http://www.thymeleaf.org"
+     xmlns:hello="http://www.jahia.com/thymeleaf/hello"
+     xmlns:template="http://www.jahia.com/thymeleaf/template">
     <p th:text="${currentNode.getProperty('thymeleafText').getValue().getString()}">Welcome to our grocery store!</p>
     <p th:text="#{home.welcome}">Message test</p>
     <p hello:sayto="World">Hi ya!</p>
+    <p hello:node="${currentNode}">Hi ya!</p>
+    <p template:node="${currentNode}">Hi ya!</p>
+    <template:area path="home"/>
 </div>

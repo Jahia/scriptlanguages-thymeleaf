@@ -1,4 +1,4 @@
-package org.jahia.services.render.scripting.thymeleaf.examples.dialect;
+package org.jahia.services.render.scripting.thymeleaf.support.dialect;
 
 import org.thymeleaf.Arguments;
 import org.thymeleaf.dom.Element;
