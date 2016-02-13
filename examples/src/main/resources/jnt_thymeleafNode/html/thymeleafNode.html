@@ -3,10 +3,17 @@
    xmlns:th="http://www.thymeleaf.org"
      xmlns:hello="http://www.jahia.com/thymeleaf/hello"
      xmlns:template="http://www.jahia.com/thymeleaf/template">
-    <p th:text="${currentNode.getProperty('thymeleafText').getValue().getString()}">Welcome to our grocery store!</p>
-    <p th:text="#{home.welcome}">Message test</p>
-    <p hello:sayto="World">Hi ya!</p>
-    <p hello:node="${currentNode}">Hi ya!</p>
-    <p template:node="${currentNode}">Hi ya!</p>
+    <!--<p th:text="${currentNode.getProperty('thymeleafText').getValue().getString()}">Welcome to our grocery store!</p>-->
+    <!--<p th:text="#{home.welcome}">Message test</p>-->
+    <!--<p hello:sayto="World">Hi ya!</p>-->
+    <!--<p hello:node="${currentNode}">Hi ya!</p>-->
+    <!--<p template:node="${currentNode}">Hi ya!</p>-->
+    Test
     <template:area path="home"/>
+    <template:module path="buttons" params="firstName=sajid,lastName=sajid">
+        <button type="button">Go</button>
+    </template:module>
+    <template:module path="*" nodeTypes="jnt:bigText"/>
+    random
+    <p th:text="${#randomUtils.nextInt()}"/>
 </div>

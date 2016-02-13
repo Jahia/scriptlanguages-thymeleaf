@@ -35,7 +35,6 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +52,6 @@ public class ModuleService {
     private static volatile boolean exclusionFilterChecked;
 
     private StringBuilder builder;
-    private boolean checkConstraints;
 
     protected RenderContext renderContext;
     protected Resource currentResource;
@@ -70,13 +68,15 @@ public class ModuleService {
     protected String nodeTypes;
     protected int listLimit;
     protected boolean editable;
+    private boolean checkConstraints;
+    protected Map<String, String> parameters;
 
     protected String constraints;
-    protected Map<String, String> parameters;
 
     /**
      *
      * @param renderContext
+     * @param currentResource
      * @param node
      * @param contextSite
      * @param nodeName
@@ -85,6 +85,8 @@ public class ModuleService {
      * @param templateType
      * @param nodeTypes
      * @param editable
+     * @param checkConstraints
+     * @param parameters
      */
     public ModuleService(final RenderContext renderContext,
                          final Resource currentResource,
@@ -95,8 +97,10 @@ public class ModuleService {
                          final String view,
                          final String templateType,
                          final String nodeTypes,
-                         final boolean editable) {
-        this(renderContext, currentResource, path, view, templateType, nodeTypes, -1, editable);
+                         final boolean editable,
+                         final boolean checkConstraints,
+                         final Map<String, String> parameters) {
+        this(renderContext, currentResource, path, view, templateType, nodeTypes, -1, editable, checkConstraints, parameters);
         this.node = node;
         this.contextSite = contextSite;
         this.nodeName = nodeName;
@@ -105,12 +109,15 @@ public class ModuleService {
     /**
      *
      * @param renderContext
+     * @param currentResource
      * @param path
      * @param view
      * @param templateType
      * @param nodeTypes
      * @param listLimit
      * @param editable
+     * @param checkConstraints
+     * @param parameters
      */
     public ModuleService(final RenderContext renderContext,
                          final Resource currentResource,
@@ -119,7 +126,9 @@ public class ModuleService {
                          final String templateType,
                          final String nodeTypes,
                          final Integer listLimit,
-                         final boolean editable) {
+                         final boolean editable,
+                         final boolean checkConstraints,
+                         final Map<String, String> parameters) {
         this.renderContext = renderContext;
         this.currentResource = currentResource;
         this.path = path;
@@ -128,13 +137,22 @@ public class ModuleService {
         this.nodeTypes = nodeTypes;
         this.listLimit = listLimit;
         this.editable = editable;
+        this.checkConstraints = checkConstraints;
+        this.parameters = parameters;
 
-        this.parameters = new HashMap<String, String>();
         this.builder = new StringBuilder();
-        this.checkConstraints = true;
-
         request = renderContext.getRequest();
         response = renderContext.getResponse();
+    }
+
+    /**
+     *
+     */
+    public void init() {
+        // Begin: The two lines below were in the doStartTag, not sure how to emulate this in Thymeleaf processor
+        final Integer level = (Integer) request.getAttribute(ScriptingConstants.ATTR_ORG_JAHIA_MODULES_LEVEL);
+        request.setAttribute(ScriptingConstants.ATTR_ORG_JAHIA_MODULES_LEVEL, level != null ? level + 1 : 2);
+        // End
     }
 
     /**
@@ -142,11 +160,11 @@ public class ModuleService {
      * @throws Exception
      */
     public String doProcess() {
-        final Integer level = (Integer) request.getAttribute(ScriptingConstants.ATTR_ORG_JAHIA_MODULES_LEVEL);
-        request.setAttribute(ScriptingConstants.ATTR_ORG_JAHIA_MODULES_LEVEL, level != null ? level + 1 : 2);
-
+        init();
         try {
-            setNode();
+            if (node == null) {
+                setNode();
+            }
 
             String resourceNodeType = null;
             if (parameters.containsKey(ScriptingConstants.ATTR_RESOURCE_NODE_TYPE)) {
@@ -172,7 +190,10 @@ public class ModuleService {
                                 + (currentLevel - 1));
                     }
                     try {
-                        if (constrainedNodeTypes != null && !"".equals(constrainedNodeTypes.trim()) && !node.isNodeType("jmix:skipConstraintCheck") && !node.getParent().isNodeType("jmix:skipConstraintCheck")) {
+                        if (constrainedNodeTypes != null
+                                && !"".equals(constrainedNodeTypes.trim())
+                                && !node.isNodeType(ScriptingConstants.MIX_JMIX_SKIP_CONSTRAINT_CHECK)
+                                && !node.getParent().isNodeType(ScriptingConstants.MIX_JMIX_SKIP_CONSTRAINT_CHECK)) {
                             final StringTokenizer st = new StringTokenizer(constrainedNodeTypes, " ");
                             boolean found = false;
                             Node displayedNode = node;
@@ -217,14 +238,8 @@ public class ModuleService {
                         throw new Exception(e);
                     }
                 }
-                boolean isVisible = true;
 
-                try {
-                    isVisible = renderContext.getEditModeConfig() == null || renderContext.isVisible(node);
-                } catch (RepositoryException e) {
-                    LOGGER.error(e.getMessage(), e);
-                }
-
+                final boolean isVisible = isVisible();
                 try {
                     boolean canEdit = canEdit()
                             && contributeAccess(resource.getNode())
@@ -236,23 +251,13 @@ public class ModuleService {
                         final String type = getModuleType();
                         final List<String> contributeTypes = contributeTypes(resource.getNode());
                         final String oldNodeTypes = nodeTypes;
-                        String add = "";
-                        if (!nodeEditable) {
-                            add = "editable=\"false\"";
-                        }
-                        if (contributeTypes != null) {
-                            nodeTypes = StringUtils.join(contributeTypes, " ");
-                            add = "editable=\"false\"";
-                        }
-                        if (node.isNodeType(Constants.JAHIAMIX_BOUND_COMPONENT)) {
-                            add += " bindable=\"true\"";
-                        }
+                        final String additionalParams = getAdditionalParams(nodeEditable, contributeTypes);
 
                         try {
                             final Script script = RenderService.getInstance().resolveScript(resource, renderContext);
-                            printModuleStart(type, node.getPath(), script, add);
+                            printModuleStart(type, node.getPath(), script, additionalParams);
                         } catch (TemplateNotFoundException e) {
-                            printModuleStart(type, node.getPath(), null, add);
+                            printModuleStart(type, node.getPath(), null, additionalParams);
                         }
                         nodeTypes = oldNodeTypes;
                         currentResource.getDependencies().add(node.getCanonicalPath());
@@ -289,6 +294,42 @@ public class ModuleService {
     }
 
     /**
+     *
+     * @return
+     */
+    private boolean isVisible() {
+        try {
+            return renderContext.getEditModeConfig() == null || renderContext.isVisible(node);
+        } catch (RepositoryException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        return true;
+    }
+
+    /**
+     *
+     * @param nodeEditable
+     * @param contributeTypes
+     * @return
+     * @throws RepositoryException
+     */
+    private String getAdditionalParams(final boolean nodeEditable,
+                                       final List<String> contributeTypes) throws RepositoryException {
+        String add = "";
+        if (!nodeEditable) {
+            add = "editable=\"false\"";
+        }
+        if (contributeTypes != null) {
+            nodeTypes = StringUtils.join(contributeTypes, " ");
+            add = "editable=\"false\"";
+        }
+        if (node.isNodeType(Constants.JAHIAMIX_BOUND_COMPONENT)) {
+            add += " bindable=\"true\"";
+        }
+        return add;
+    }
+
+    /**
      * @param resource
      * @return
      * @throws RepositoryException
@@ -298,13 +339,11 @@ public class ModuleService {
         if (filter == null) {
             return false;
         }
-
         try {
             return filter.prepare(renderContext, resource, null) != null;
         } catch (Exception e) {
             LOGGER.error("Cannot evaluate exclude filter", e);
         }
-
         return false;
     }
 
@@ -585,8 +624,9 @@ public class ModuleService {
                 restriction = constraints;
             }
 
-            final boolean setRestrictions = request.getAttribute(ScriptingConstants.ATTR_AREA_NODE_TYPES_RESTRICTION + level) == null &&
-                    !StringUtils.isEmpty(restriction);
+            final boolean setRestrictions = request.getAttribute(ScriptingConstants
+                    .ATTR_AREA_NODE_TYPES_RESTRICTION + level) == null
+                    && !StringUtils.isEmpty(restriction);
             if (setRestrictions) {
                 request.setAttribute(ScriptingConstants.ATTR_AREA_NODE_TYPES_RESTRICTION + level, restriction);
             }
@@ -660,20 +700,5 @@ public class ModuleService {
                 printModuleEnd();
             }
         }
-    }
-
-    /**
-     * @param name
-     * @param value
-     */
-    public void addParameter(String name, String value) {
-        parameters.put(name, value);
-    }
-
-    /**
-     * @param checkConstraints
-     */
-    public void setCheckConstraints(boolean checkConstraints) {
-        this.checkConstraints = checkConstraints;
     }
 }

@@ -20,6 +20,7 @@ import javax.jcr.RepositoryException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -40,7 +41,6 @@ public class AreaService extends ModuleService {
     private boolean limitedAbsoluteAreaEdit = true;
 
     /**
-     *
      * @param renderContext
      * @param path
      * @param areaType
@@ -75,7 +75,9 @@ public class AreaService extends ModuleService {
                 templateType,
                 nodeTypes,
                 listLimit,
-                editable);
+                editable,
+                true,
+                new HashMap<String, String>());
         this.areaType = areaType;
         this.moduleType = moduleType;
         this.mockupStyle = mockupStyle;
@@ -85,7 +87,6 @@ public class AreaService extends ModuleService {
     }
 
     /**
-     *
      * @return
      * @throws RepositoryException
      */
@@ -95,7 +96,6 @@ public class AreaService extends ModuleService {
     }
 
     /**
-     *
      * @throws RepositoryException
      * @throws IOException
      */
@@ -142,7 +142,6 @@ public class AreaService extends ModuleService {
             }
 
             boolean isEditable = true;
-
             final StringBuilder additionalParameters = new StringBuilder();
             additionalParameters.append("missingList=\"true\"");
             if (conflictsWith != null) {
@@ -177,15 +176,14 @@ public class AreaService extends ModuleService {
     }
 
     /**
-     *
      * @return
      */
+    @Override
     protected String getConfiguration() {
         return Resource.CONFIGURATION_WRAPPEDCONTENT;
     }
 
     /**
-     *
      * @return
      */
     @Override
@@ -193,19 +191,18 @@ public class AreaService extends ModuleService {
         if (path != null) {
             return renderContext.isEditMode() && editable &&
                     request.getAttribute(ScriptingConstants.ATTR_IN_AREA) == null;
-        } else if(node !=null){
+        } else if (node != null) {
             return renderContext.isEditMode() && editable &&
                     request.getAttribute(ScriptingConstants.ATTR_IN_AREA) == null && node.getPath().equals(renderContext.getMainResource().getNode().getPath());
-        }
-        else {
+        } else {
             return super.canEdit();
         }
     }
 
     /**
-     *
      * @throws IOException
      */
+    @Override
     protected void setNode() throws IOException {
         Resource mainResource = renderContext.getMainResource();
 
@@ -246,9 +243,9 @@ public class AreaService extends ModuleService {
                         request.setAttribute(ScriptingConstants.ATTR_IN_AREA, Boolean.TRUE);
                     }
 
-                    if(LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("Looking for absolute area "+path+", will be searched in node "+ node.getPath() +
-                                " saved template = "+(templateNode != null ? templateNode.serialize() : "none")+", previousTemplate set to null");
+                    if (LOGGER.isDebugEnabled()) {
+                        LOGGER.debug("Looking for absolute area " + path + ", will be searched in node " + node.getPath() +
+                                " saved template = " + (templateNode != null ? templateNode.serialize() : "none") + ", previousTemplate set to null");
                     }
                     node = node.getNode(path);
                     request.setAttribute(ScriptingConstants.ATTR_ORG_JAHIA_EMPTY_AREA, Boolean.FALSE);
@@ -266,14 +263,14 @@ public class AreaService extends ModuleService {
                             LOGGER.debug(
                                     "Cannot get a node {}, relative to the home page of site {}"
                                             + " for main resource {}",
-                                    new String[] {
+                                    new String[]{
                                             path,
                                             main != null && main.getResolveSite() != null ? main.getResolveSite().getPath() : null,
-                                            main != null ? main.getPath() : null });
+                                            main != null ? main.getPath() : null});
                         } else {
                             LOGGER.debug(
                                     "Cannot get a node {}, with level {} for main resource {}",
-                                    new String[] { path, String.valueOf(level), main != null ? main.getPath() : null });
+                                    new String[]{path, String.valueOf(level), main != null ? main.getPath() : null});
                         }
                     }
                 }
@@ -289,7 +286,7 @@ public class AreaService extends ModuleService {
                     nodes.add(mainResource.getNode());
                     boolean isCurrentResource = false;
                     if (areaAsSubNode) {
-                        nodes.add(0,currentResource.getNode());
+                        nodes.add(0, currentResource.getNode());
                         isCurrentResource = true;
                     }
                     boolean found = false;
@@ -298,7 +295,7 @@ public class AreaService extends ModuleService {
                     final Set<String> allPaths = renderContext.getRenderedPaths();
                     for (final JCRNodeWrapper node : nodes) {
                         if (!path.equals("*") && node.hasNode(path)
-                                && !allPaths.contains(node.getPath()+"/"+path)) {
+                                && !allPaths.contains(node.getPath() + "/" + path)) {
                             notMainResource = mainResource.getNode() != node
                                     && !node.getPath().startsWith(renderContext.getMainResource().getNode().getPath());
                             this.node = node.getNode(path);
@@ -315,7 +312,7 @@ public class AreaService extends ModuleService {
                                     break;
                                 } else {
                                     found = true;
-                                    request.setAttribute(ScriptingConstants.ATTR_ORG_JAHIA_EMPTY_AREA,Boolean.FALSE);
+                                    request.setAttribute(ScriptingConstants.ATTR_ORG_JAHIA_EMPTY_AREA, Boolean.FALSE);
                                     break;
                                 }
                             }
@@ -327,14 +324,14 @@ public class AreaService extends ModuleService {
                     }
 
                     request.setAttribute(ScriptingConstants.ATTR_PREVIOUS_TEMPLATE, t);
-                    if(LOGGER.isDebugEnabled()) {
-                        String tempNS = (templateNode!=null)?templateNode.serialize():null;
-                        String prevNS = (t!=null)?t.serialize():null;
-                        LOGGER.debug("Looking for local area "+path+", will be searched in node "+ (node!=null?node.getPath():null) +
-                                " saved template = "+tempNS+", previousTemplate set to "+prevNS);
+                    if (LOGGER.isDebugEnabled()) {
+                        String tempNS = (templateNode != null) ? templateNode.serialize() : null;
+                        String prevNS = (t != null) ? t.serialize() : null;
+                        LOGGER.debug("Looking for local area " + path + ", will be searched in node " + (node != null ? node.getPath() : null) +
+                                " saved template = " + tempNS + ", previousTemplate set to " + prevNS);
                     }
 
-                    boolean templateEdit = mainResource.getModuleParams().containsKey(ScriptingConstants.ATTR_TEMPLATE_EDIT) &&mainResource.getModuleParams().get(ScriptingConstants.ATTR_TEMPLATE_EDIT).equals(node.getParent().getIdentifier());
+                    boolean templateEdit = mainResource.getModuleParams().containsKey(ScriptingConstants.ATTR_TEMPLATE_EDIT) && mainResource.getModuleParams().get(ScriptingConstants.ATTR_TEMPLATE_EDIT).equals(node.getParent().getIdentifier());
                     if (notMainResource && !templateEdit) {
                         request.setAttribute(ScriptingConstants.ATTR_IN_AREA, Boolean.TRUE);
                     }
@@ -349,13 +346,13 @@ public class AreaService extends ModuleService {
                     request.setAttribute(ScriptingConstants.ATTR_PREVIOUS_TEMPLATE, null);
 
                     if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("Looking for absolute area " + path + ", will be searched in node " + (node!=null?node.getPath():null) +
+                        LOGGER.debug("Looking for absolute area " + path + ", will be searched in node " + (node != null ? node.getPath() : null) +
                                 " saved template = " + (templateNode != null ? templateNode.serialize() : "none") + ", previousTemplate set to null");
                     }
 
                     try {
                         node = (JCRNodeWrapper) session.getItem(path);
-                        request.setAttribute(ScriptingConstants.ATTR_ORG_JAHIA_EMPTY_AREA,Boolean.FALSE);
+                        request.setAttribute(ScriptingConstants.ATTR_ORG_JAHIA_EMPTY_AREA, Boolean.FALSE);
                     } catch (PathNotFoundException e) {
                         missingResource();
                     }
@@ -365,7 +362,7 @@ public class AreaService extends ModuleService {
                 request.setAttribute(ScriptingConstants.ATTR_PREVIOUS_TEMPLATE, null);
                 request.removeAttribute(ScriptingConstants.ATTR_SKIP_WRAPPER);
                 node = mainResource.getNode();
-                request.setAttribute(ScriptingConstants.ATTR_ORG_JAHIA_EMPTY_AREA,Boolean.FALSE);
+                request.setAttribute(ScriptingConstants.ATTR_ORG_JAHIA_EMPTY_AREA, Boolean.FALSE);
             }
         } catch (RepositoryException e) {
             LOGGER.error(e.getMessage(), e);
@@ -379,7 +376,6 @@ public class AreaService extends ModuleService {
     }
 
     /**
-     *
      * @return
      * @throws Exception
      */
@@ -392,7 +388,7 @@ public class AreaService extends ModuleService {
             LOGGER.error(e.getMessage(), e);
         } finally {
             request.setAttribute(ScriptingConstants.ATTR_PREVIOUS_TEMPLATE, templateNode);
-            if(LOGGER.isDebugEnabled()) {
+            if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Restoring previous template "
                         + (templateNode != null ? templateNode.serialize() : "none"));
             }
@@ -402,7 +398,6 @@ public class AreaService extends ModuleService {
     }
 
     /**
-     *
      * @param resource
      * @throws IOException
      * @throws RenderException
@@ -415,10 +410,9 @@ public class AreaService extends ModuleService {
     }
 
     /**
-     *
      * @return
      */
-    protected  boolean isEmptyArea() {
+    protected boolean isEmptyArea() {
         for (final String s : constraints.split(" ")) {
             if (!JCRContentUtils.getChildrenOfType(node, s).isEmpty()) {
                 return false;
