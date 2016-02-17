@@ -13,7 +13,13 @@
     <template:module path="buttons" params="firstName=sajid,lastName=sajid">
         <button type="button">Go</button>
     </template:module>
+
+    <b>List</b><br/>
+    <div th:id="${currentNode.identifier}">
+        <div class="col-md-4"  th:each="text,status  : ${#jcr.getChildrenOfType(currentNode, 'jnt:bigText')}">
+            <template:module node="${text}"/>
+        </div>
+        <div class="clear-both-sides"></div>
+    </div>
     <template:module path="*" nodeTypes="jnt:bigText"/>
-    random
-    <p th:text="${#randomUtils.nextInt()}"/>
 </div>

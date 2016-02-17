@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * Created by smomin on 2/9/16.
  */
-public class ModuleService {
+public class ModuleService implements ScriptingService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ModuleService.class);
 
     private static volatile AbstractFilter exclusionFilter;
@@ -148,6 +148,7 @@ public class ModuleService {
     /**
      *
      */
+    @Override
     public void init() {
         // Begin: The two lines below were in the doStartTag, not sure how to emulate this in Thymeleaf processor
         final Integer level = (Integer) request.getAttribute(ScriptingConstants.ATTR_ORG_JAHIA_MODULES_LEVEL);
@@ -159,6 +160,7 @@ public class ModuleService {
      * @return
      * @throws Exception
      */
+    @Override
     public String doProcess() {
         init();
         try {

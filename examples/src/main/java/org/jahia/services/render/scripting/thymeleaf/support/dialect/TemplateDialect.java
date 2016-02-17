@@ -70,7 +70,7 @@ public class TemplateDialect extends AbstractDialect {
 
     public IStandardVariableExpressionEvaluator getVariableExpressionEvaluator() {
         if (this.variableExpressionEvaluator == null) {
-            this.variableExpressionEvaluator = JahiaVariableExpressionEvaluator.INSTANCE;
+            this.variableExpressionEvaluator = JahiaVariableExpressionEvaluator.getInstance();
         }
         return this.variableExpressionEvaluator;
     }
