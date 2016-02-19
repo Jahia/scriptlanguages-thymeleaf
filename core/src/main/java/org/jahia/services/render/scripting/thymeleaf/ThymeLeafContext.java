@@ -16,11 +16,13 @@ public class ThymeLeafContext implements IContext {
 
     public static final String CURRENT_LOCALE = "currentLocale";
     public static final String CURRENT_RESOURCE = "currentResource";
+    public static final String OPTIONAL_RESOURCE = "optionalResource";
     public static final String RENDER_CONTEXT = "renderContext";
     private final VariablesMap<String,Object> variables = new VariablesMap<String, Object>();
     private final Locale locale;
     private final RenderContext renderContext;
     private final Resource currentResource;
+    private final Resource optionalResource;
 
     public ThymeLeafContext(ScriptContext scriptContext) {
         final Bindings globalBindings = scriptContext.getBindings(ScriptContext.GLOBAL_SCOPE);
@@ -28,10 +30,10 @@ public class ThymeLeafContext implements IContext {
         variables.putAll(globalBindings);
         variables.putAll(engineBindings);
 
-
+        renderContext = (RenderContext) variables.get(RENDER_CONTEXT);
         locale = (Locale) variables.get(CURRENT_LOCALE);
         currentResource = (Resource) variables.get(CURRENT_RESOURCE);
-        renderContext = (RenderContext) variables.get(RENDER_CONTEXT);
+        optionalResource = (Resource) variables.get(OPTIONAL_RESOURCE);
     }
 
     @Override
@@ -55,5 +57,9 @@ public class ThymeLeafContext implements IContext {
 
     public Resource getCurrentResource() {
         return currentResource;
+    }
+
+    public Resource getOptionalResource() {
+        return optionalResource;
     }
 }
