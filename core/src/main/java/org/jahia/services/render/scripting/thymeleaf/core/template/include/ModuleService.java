@@ -48,31 +48,30 @@ import java.util.UUID;
  */
 public class ModuleService implements ScriptingService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ModuleService.class);
+    private static final int DEFAULT_LIST_LIMIT = -1;
+    private static final boolean DEFAULT_CHECK_CONSTRAINTS = true;
 
     private static volatile AbstractFilter exclusionFilter;
     private static volatile boolean exclusionFilterChecked;
 
-    private StringBuilder builder;
-
     protected RenderContext renderContext;
-    protected Resource currentResource;
-    protected HttpServletRequest request;
-    protected HttpServletResponse response;
-
     protected JCRNodeWrapper node;
-    protected String nodeName;
-    protected JCRSiteNode contextSite;
-
     protected String path;
     protected String view;
     protected String templateType;
     protected String nodeTypes;
-    protected int listLimit;
     protected boolean editable;
-    private boolean checkConstraints;
     protected Map<String, String> parameters;
-
     protected String constraints;
+    protected Resource currentResource;
+    protected HttpServletRequest request;
+    protected HttpServletResponse response;
+
+    private JCRSiteNode contextSite;
+    private boolean checkConstraints;
+    private int listLimit;
+    private String nodeName;
+    private StringBuilder builder;
 
     /**
      *
@@ -86,7 +85,6 @@ public class ModuleService implements ScriptingService {
      * @param templateType
      * @param nodeTypes
      * @param editable
-     * @param checkConstraints
      * @param parameters
      */
     public ModuleService(final RenderContext renderContext,
@@ -99,12 +97,9 @@ public class ModuleService implements ScriptingService {
                          final String templateType,
                          final String nodeTypes,
                          final boolean editable,
-                         final boolean checkConstraints,
                          final Map<String, String> parameters) {
-        this(renderContext, currentResource, path, view, templateType, nodeTypes, -1, editable, checkConstraints, parameters);
-        this.node = node;
-        this.contextSite = contextSite;
-        this.nodeName = nodeName;
+        this(renderContext, currentResource, node, contextSite, nodeName, path, view, templateType,
+                nodeTypes, DEFAULT_LIST_LIMIT, editable, DEFAULT_CHECK_CONSTRAINTS, parameters);
     }
 
     /**
@@ -116,6 +111,7 @@ public class ModuleService implements ScriptingService {
      * @param templateType
      * @param editable
      * @param checkConstraints
+     * @param parameters
      */
     public ModuleService(final RenderContext renderContext,
                          final Resource currentResource,
@@ -125,8 +121,31 @@ public class ModuleService implements ScriptingService {
                          final boolean editable,
                          final boolean checkConstraints,
                          final Map<String, String> parameters) {
-        this(renderContext, currentResource, view, templateType, -1, editable, checkConstraints, parameters);
-        this.node = node;
+        this(renderContext, currentResource, node, null, null, null, view, templateType,
+                null, DEFAULT_LIST_LIMIT, editable, checkConstraints, parameters);
+    }
+
+    /**
+     *
+     * @param renderContext
+     * @param currentResource
+     * @param path
+     * @param view
+     * @param templateType
+     * @param nodeTypes
+     * @param editable
+     * @param parameters
+     */
+    public ModuleService(final RenderContext renderContext,
+                         final Resource currentResource,
+                         final String path,
+                         final String view,
+                         final String templateType,
+                         final String nodeTypes,
+                         final boolean editable,
+                         final Map<String, String> parameters) {
+        this(renderContext, currentResource, null, null, null, path, view, templateType,
+                nodeTypes, DEFAULT_LIST_LIMIT, editable, DEFAULT_CHECK_CONSTRAINTS, parameters);
     }
 
     /**
@@ -139,7 +158,6 @@ public class ModuleService implements ScriptingService {
      * @param nodeTypes
      * @param listLimit
      * @param editable
-     * @param checkConstraints
      * @param parameters
      */
     public ModuleService(final RenderContext renderContext,
@@ -150,37 +168,52 @@ public class ModuleService implements ScriptingService {
                          final String nodeTypes,
                          final Integer listLimit,
                          final boolean editable,
-                         final boolean checkConstraints,
                          final Map<String, String> parameters) {
-        this(renderContext, currentResource, view, templateType, listLimit, editable, checkConstraints, parameters);
-        this.path = path;
-        this.nodeTypes = nodeTypes;
+        this(renderContext, currentResource, null, null, null, path, view, templateType,
+                nodeTypes, listLimit, editable, DEFAULT_CHECK_CONSTRAINTS, parameters);
     }
 
     /**
      *
      * @param renderContext
      * @param currentResource
+     * @param node
+     * @param contextSite
+     * @param nodeName
+     * @param path
      * @param view
      * @param templateType
+     * @param nodeTypes
+     * @param listLimit
      * @param editable
      * @param checkConstraints
+     * @param parameters
      */
     public ModuleService(final RenderContext renderContext,
                          final Resource currentResource,
+                         final JCRNodeWrapper node,
+                         final JCRSiteNode contextSite,
+                         final String nodeName,
+                         final String path,
                          final String view,
                          final String templateType,
+                         final String nodeTypes,
                          final Integer listLimit,
                          final boolean editable,
                          final boolean checkConstraints,
                          final Map<String, String> parameters) {
+        this.path = path;
+        this.nodeTypes = nodeTypes;
+        this.node = node;
+        this.contextSite = contextSite;
+        this.nodeName = nodeName;
         this.renderContext = renderContext;
         this.currentResource = currentResource;
         this.view = view;
         this.templateType = templateType;
+        this.listLimit = listLimit;
         this.editable = editable;
         this.checkConstraints = checkConstraints;
-        this.listLimit = listLimit;
         this.parameters = parameters;
 
         this.builder = new StringBuilder();
@@ -629,7 +662,7 @@ public class ModuleService implements ScriptingService {
             builder.append(" nodetypes=\"").append(constraints).append("\"");
         }
 
-        if (listLimit > -1) {
+        if (listLimit > DEFAULT_LIST_LIMIT) {
             builder.append(" listlimit=\"").append(listLimit).append("\"");
         }
 

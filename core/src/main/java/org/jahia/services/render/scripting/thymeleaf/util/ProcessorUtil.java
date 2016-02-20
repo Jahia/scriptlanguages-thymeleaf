@@ -92,8 +92,8 @@ public final class ProcessorUtil {
                                                    final Map<String, Attribute> attributeMap,
                                                    final Configuration configuration,
                                                    final IStandardExpressionParser parser) {
-        if (attributeMap.containsKey(ScriptingConstants.ATTR_NODE)) {
-            final String attributeValue = element.getAttributeValue(ScriptingConstants.ATTR_NODE);
+        if (attributeMap.containsKey(ScriptingConstants.DX_ATTR_NODE)) {
+            final String attributeValue = element.getAttributeValue(ScriptingConstants.DX_ATTR_NODE);
             final IStandardExpression expression = parser.parseExpression(configuration, arguments, attributeValue);
             return (JCRNodeWrapper) expression.execute(configuration, arguments);
         } else {
@@ -114,8 +114,8 @@ public final class ProcessorUtil {
                                              final Map<String, Attribute> attributeMap,
                                              final Configuration configuration,
                                              final IStandardExpressionParser parser) {
-        if (attributeMap.containsKey(ScriptingConstants.ATTR_CONTEXT_SITE)) {
-            final String attributeValue = element.getAttributeValue(ScriptingConstants.ATTR_CONTEXT_SITE);
+        if (attributeMap.containsKey(ScriptingConstants.DX_ATTR_CONTEXT_SITE)) {
+            final String attributeValue = element.getAttributeValue(ScriptingConstants.DX_ATTR_CONTEXT_SITE);
             final IStandardExpression expression = parser.parseExpression(configuration, arguments, attributeValue);
             return (JCRSiteNode) expression.execute(configuration, arguments);
         } else {

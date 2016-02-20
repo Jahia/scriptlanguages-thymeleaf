@@ -24,7 +24,7 @@ public class JahiaVariableExpressionEvaluator extends OgnlVariableExpressionEval
     private static final String JCR = "jcr";
     private static final String USER = "user";
     private static final String WORFLOW = "worflow";
-    public static final String FUNCTION = "function";
+    private static final String FUNCTION = "function";
 
     public static JahiaVariableExpressionEvaluator getInstance() {
         return INSTANCE;

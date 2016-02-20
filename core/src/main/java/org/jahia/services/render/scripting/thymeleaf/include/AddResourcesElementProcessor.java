@@ -22,20 +22,20 @@ public class AddResourcesElementProcessor extends AbstractUnescapedTextChildModi
     private static final Logger LOGGER = LoggerFactory.getLogger(AddResourcesElementProcessor.class);
 
     public AddResourcesElementProcessor() {
-        super("resources");
+        super("add-resources");
     }
 
     @Override
     protected String getText(final Arguments arguments, final Element element) {
         final ThymeLeafContext context = (ThymeLeafContext) arguments.getContext();
-        final String type = element.getAttributeValue(ScriptingConstants.ATTR_TYPE);
-        final String resources = element.getAttributeValue(ScriptingConstants.ATTR_RESOURCES);
-        final String title = element.getAttributeValue(ScriptingConstants.ATTR_TITLE);
-        final String key = element.getAttributeValue(ScriptingConstants.ATTR_KEY);
-        final String targetTag = element.getAttributeValue(ScriptingConstants.ATTR_TARGET_TAG);
-        final String rel = element.getAttributeValue(ScriptingConstants.ATTR_REL);
-        final String media = element.getAttributeValue(ScriptingConstants.ATTR_MEDIA);
-        final String condition = element.getAttributeValue(ScriptingConstants.ATTR_CONDITION);
+        final String type = element.getAttributeValue(ScriptingConstants.DX_ATTR_TYPE);
+        final String resources = element.getAttributeValue(ScriptingConstants.DX_ATTR_RESOURCES);
+        final String title = element.getAttributeValue(ScriptingConstants.DX_ATTR_TITLE);
+        final String key = element.getAttributeValue(ScriptingConstants.DX_ATTR_KEY);
+        final String targetTag = element.getAttributeValue(ScriptingConstants.DX_ATTR_TARGET_TAG);
+        final String rel = element.getAttributeValue(ScriptingConstants.DX_ATTR_REL);
+        final String media = element.getAttributeValue(ScriptingConstants.DX_ATTR_MEDIA);
+        final String condition = element.getAttributeValue(ScriptingConstants.DX_ATTR_CONDITION);
         final StringBuilder bodyContent = new StringBuilder();
         if (element.hasChildren()) {
             for (final Node node : element.getChildren()) {
@@ -44,7 +44,7 @@ public class AddResourcesElementProcessor extends AbstractUnescapedTextChildModi
         }
 
         final Map<String, Attribute> attributeMap = element.getAttributeMap();
-        final boolean insert = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.ATTR_INSERT, false);
+        final boolean insert = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_INSERT, false);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("insert is {}", insert);

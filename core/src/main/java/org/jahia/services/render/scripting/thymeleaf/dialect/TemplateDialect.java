@@ -26,7 +26,7 @@ public class TemplateDialect extends AbstractDialect {
 
     @Override
     public String getPrefix() {
-        return "template";
+        return "dx-template";
     }
 
     @Override

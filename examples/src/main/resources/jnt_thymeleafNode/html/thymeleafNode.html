@@ -1,7 +1,8 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-transitional-thymeleaf-4.dtd">
 <div xmlns="http://www.w3.org/1999/xhtml"
      xmlns:th="http://www.thymeleaf.org"
-     xmlns:template="http://www.jahia.com/thymeleaf/template" th:with="firstName=sajid">
+     xmlns:dx="http://www.jahia.com/thymeleaf/dx"
+     xmlns:dx-template="http://www.jahia.com/thymeleaf/template" th:with="firstName=sajid">
   <!--/*@thymesVar id="currentNode" type="org.jahia.services.content.JCRNodeWrapper"*/-->
   <!--/*@thymesVar id="out" type="java.io.PrintWriter"*/-->
   <!--/*@thymesVar id="script" type="org.jahia.services.render.scripting.Script"*/-->
@@ -11,25 +12,32 @@
   <!--/*@thymesVar id="currentResource" type="org.jahia.services.render.Resource"*/-->
   <!--/*@thymesVar id="url" type="org.jahia.services.render.URLGenerator"*/-->
   <div th:text="${firstName}"></div>
-  <template:resources type="css" resources="blank.css"/>
-  <template:resources type="javascript" resources="blank.js"/>
-  <template:resources type="inline">
+  <dx-template:add-resources dx:type="css" dx:resources="blank.css"/>
+  <dx-template:add-resources dx:type="css" dx:resources="blank.css"/>
+  <dx-template:add-resources dx:type="javascript" dx:resources="blank.js"/>
+  <dx-template:add-resources dx:type="inline">
     <script type="text/javascript">
       console.log("inline");
     </script>
-  </template:resources>
+  </dx-template:add-resources>
 
   <div class="blankStyle">Test</div>
-  <template:area path="home"/>
+  <dx-template:area dx:path="home"/>
 
-  <template:module path="buttons" params="firstName=${firstName},lastName=sajid">
+  <dx-template:module dx:path="buttons" dx:params="firstName=${firstName},lastName=sajid">
     <button type="button">Go</button>
-  </template:module>
+  </dx-template:module>
   <b>List</b><br/>
   <div th:id="${currentNode.identifier}">
     <div class="col-md-4" th:each="text,status : ${#jcr.getChildrenOfType(currentNode, 'jnt:bigText')}">
-      <template:module node="${text}"/>
+      <dx-template:module dx:node="${text}"/>
     </div>
   </div>
-  <template:module path="*" nodeTypes="jnt:bigText"/>
+  <dx-template:module dx:path="*" dx:nodeTypes="jnt:bigText"/>
+  <dx-template:add-wrapper dx:name="test"/>
+  <dx-template:add-cache-dependency dx:node="${currentNode}"/>
+
+  <div th:with="firstName=Sam">
+    <div th:text="${firstName}">Jordan</div>
+  </div>
 </div>

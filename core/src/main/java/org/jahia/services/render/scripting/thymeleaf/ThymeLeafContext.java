@@ -14,10 +14,6 @@ import java.util.Locale;
  */
 public class ThymeLeafContext implements IContext {
 
-    public static final String CURRENT_LOCALE = "currentLocale";
-    public static final String CURRENT_RESOURCE = "currentResource";
-    public static final String OPTIONAL_RESOURCE = "optionalResource";
-    public static final String RENDER_CONTEXT = "renderContext";
     private final VariablesMap<String,Object> variables = new VariablesMap<String, Object>();
     private final Locale locale;
     private final RenderContext renderContext;
@@ -30,10 +26,10 @@ public class ThymeLeafContext implements IContext {
         variables.putAll(globalBindings);
         variables.putAll(engineBindings);
 
-        renderContext = (RenderContext) variables.get(RENDER_CONTEXT);
-        locale = (Locale) variables.get(CURRENT_LOCALE);
-        currentResource = (Resource) variables.get(CURRENT_RESOURCE);
-        optionalResource = (Resource) variables.get(OPTIONAL_RESOURCE);
+        renderContext = (RenderContext) variables.get(ScriptingConstants.ATTR_RENDER_CONTEXT);
+        locale = (Locale) variables.get(ScriptingConstants.ATTR_CURRENT_LOCALE);
+        currentResource = (Resource) variables.get(ScriptingConstants.ATTR_CURRENT_RESOURCE);
+        optionalResource = (Resource) variables.get(ScriptingConstants.ATTR_OPTIONAL_RESOURCE);
     }
 
     @Override

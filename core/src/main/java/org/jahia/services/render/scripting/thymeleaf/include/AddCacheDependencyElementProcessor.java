@@ -12,7 +12,7 @@ import org.thymeleaf.Arguments;
 import org.thymeleaf.Configuration;
 import org.thymeleaf.dom.Attribute;
 import org.thymeleaf.dom.Element;
-import org.thymeleaf.processor.element.AbstractTextChildModifierElementProcessor;
+import org.thymeleaf.processor.element.AbstractUnescapedTextChildModifierElementProcessor;
 import org.thymeleaf.standard.expression.IStandardExpressionParser;
 import org.thymeleaf.standard.expression.StandardExpressions;
 
@@ -21,22 +21,22 @@ import java.util.Map;
 /**
  * Created by smomin on 2/9/16.
  */
-public class AddCacheDependencyElementProcessor extends AbstractTextChildModifierElementProcessor {
+public class AddCacheDependencyElementProcessor extends AbstractUnescapedTextChildModifierElementProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(AddCacheDependencyElementProcessor.class);
 
     public AddCacheDependencyElementProcessor() {
-        super("addCacheDependency");
+        super("add-cache-dependency");
     }
 
     @Override
     protected String getText(final Arguments arguments, final Element element) {
         final ThymeLeafContext context = (ThymeLeafContext) arguments.getContext();
         final String uuid = element.getAttributeValue(ScriptingConstants
-                .ATTR_UUID);
+                .DX_ATTR_UUID);
         final String stringDependency = element.getAttributeValue(ScriptingConstants
-                .ATTR_STRING_DEPENDENCY);
+                .DX_ATTR_STRING_DEPENDENCY);
         final String flushOnPathMatchingRegexp = element.getAttributeValue(ScriptingConstants
-                .ATTR_FLUSH_ON_PATH_MATCHING_REGEXP);
+                .DX_ATTR_FLUSH_ON_PATH_MATCHING_REGEXP);
 
         final Configuration configuration = arguments.getConfiguration();
         final Map<String, Attribute> attributeMap = element.getAttributeMap();

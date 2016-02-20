@@ -37,27 +37,27 @@ public class ModuleElementProcessor extends AbstractUnescapedTextChildModifierEl
     protected String getText(final Arguments arguments,
                              final Element element) {
         final ThymeLeafContext context = (ThymeLeafContext) arguments.getContext();
-        final String path = element.getAttributeValue(ScriptingConstants.ATTR_PATH);
-        final String view = element.getAttributeValue(ScriptingConstants.ATTR_VIEW);
-        final String templateType = element.getAttributeValue(ScriptingConstants.ATTR_TEMPLATE_TYPE);
-        final String nodeTypes = element.getAttributeValue(ScriptingConstants.ATTR_NODE_TYPES);
-        final String mockupStyle = element.getAttributeValue(ScriptingConstants.ATTR_MOCKUP_STYLE);
-        final String nodeName = element.getAttributeValue(ScriptingConstants.ATTR_NODE_NAME);
+        final String path = element.getAttributeValue(ScriptingConstants.DX_ATTR_PATH);
+        final String view = element.getAttributeValue(ScriptingConstants.DX_ATTR_VIEW);
+        final String templateType = element.getAttributeValue(ScriptingConstants.DX_ATTR_TEMPLATE_TYPE);
+        final String nodeTypes = element.getAttributeValue(ScriptingConstants.DX_ATTR_NODE_TYPES);
+        final String mockupStyle = element.getAttributeValue(ScriptingConstants.DX_ATTR_MOCKUP_STYLE);
+        final String nodeName = element.getAttributeValue(ScriptingConstants.DX_ATTR_NODE_NAME);
 
         final Map<String, Attribute> attributeMap = element.getAttributeMap();
-        final String areaType = ProcessorUtil.getStringValue(element, attributeMap, ScriptingConstants.KEY_AREA_TYPE, ScriptingConstants.NT_JNT_CONTENT_LIST);
-        final String moduleType = ProcessorUtil.getStringValue(element, attributeMap, ScriptingConstants.KEY_MODULE_TYPE, ScriptingConstants.MODULE_TYPE_AREA);
-        final Integer listLimit = ProcessorUtil.getIntegerValue(element, attributeMap, ScriptingConstants.KEY_LIST_LIMIT, -1);
-        final Integer level = ProcessorUtil.getIntegerValue(element, attributeMap, ScriptingConstants.KEY_LEVEL, null);
-        final boolean areaAsSubNode = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.KEY_AREA_AS_SUB_NODE, false);
-        final boolean editable = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.KEY_EDITABLE, true);
-        final boolean limitedAbsoluteAreaEdit = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.KEY_LIMITED_ABSOLUTE_AREA_EDIT, true);
+        final String areaType = ProcessorUtil.getStringValue(element, attributeMap, ScriptingConstants.DX_ATTR_AREA_TYPE, ScriptingConstants.NT_JNT_CONTENT_LIST);
+        final String moduleType = ProcessorUtil.getStringValue(element, attributeMap, ScriptingConstants.DX_ATTR_MODULE_TYPE, ScriptingConstants.MODULE_TYPE_AREA);
+        final Integer listLimit = ProcessorUtil.getIntegerValue(element, attributeMap, ScriptingConstants.DX_ATTR_LIST_LIMIT, -1);
+        final Integer level = ProcessorUtil.getIntegerValue(element, attributeMap, ScriptingConstants.DX_ATTR_LEVEL, null);
+        final boolean areaAsSubNode = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_AREA_AS_SUB_NODE, false);
+        final boolean editable = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_EDITABLE, true);
+        final boolean limitedAbsoluteAreaEdit = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_LIMITED_ABSOLUTE_AREA_EDIT, true);
 
         final Configuration configuration = arguments.getConfiguration();
         final IStandardExpressionParser parser = StandardExpressions.getExpressionParser(configuration);
         final JCRNodeWrapper node = ProcessorUtil.getJcrNodeWrapper(arguments, element, attributeMap, configuration, parser);
         final JCRSiteNode contextSite = ProcessorUtil.getJcrSiteNode(arguments, element, attributeMap, configuration, parser);
-        final Map<String, String> parameters = ProcessorUtil.getParameter(arguments, element, "params");
+        final Map<String, String> parameters = ProcessorUtil.getParameter(arguments, element, ScriptingConstants.DX_ATTR_PARAMS);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("path is {}", path);
@@ -83,7 +83,6 @@ public class ModuleElementProcessor extends AbstractUnescapedTextChildModifierEl
                 templateType,
                 nodeTypes,
                 editable,
-                true,
                 parameters).doProcess();
     }
 }

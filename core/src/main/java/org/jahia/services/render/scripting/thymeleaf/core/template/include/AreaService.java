@@ -76,7 +76,6 @@ public class AreaService extends ModuleService {
                 nodeTypes,
                 listLimit,
                 editable,
-                true,
                 new HashMap<String, String>());
         this.areaType = areaType;
         this.moduleType = moduleType;
@@ -331,7 +330,8 @@ public class AreaService extends ModuleService {
                                 " saved template = " + tempNS + ", previousTemplate set to " + prevNS);
                     }
 
-                    boolean templateEdit = mainResource.getModuleParams().containsKey(ScriptingConstants.ATTR_TEMPLATE_EDIT) && mainResource.getModuleParams().get(ScriptingConstants.ATTR_TEMPLATE_EDIT).equals(node.getParent().getIdentifier());
+                    boolean templateEdit = mainResource.getModuleParams().containsKey(ScriptingConstants.ATTR_TEMPLATE_EDIT)
+                            && mainResource.getModuleParams().get(ScriptingConstants.ATTR_TEMPLATE_EDIT).equals(node.getParent().getIdentifier());
                     if (notMainResource && !templateEdit) {
                         request.setAttribute(ScriptingConstants.ATTR_IN_AREA, Boolean.TRUE);
                     }

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialect xmlns="http://www.thymeleaf.org/extras/dialect"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.thymeleaf.org/extras/dialect
+	                    http://www.thymeleaf.org/xsd/thymeleaf-extras-dialect-2.1.xsd"
+         prefix="dx"
+         namespace-uri="http://www.jahia.com/thymeleaf/dx"
+         class="">
+
+    <!-- Jahia DX Thymeleaf attributes -->
+    <!-- ======================================= -->
+    <attribute-processor name="path">
+        <restrictions tags="template:module,template:area,template:list,template:addCacheDependency"/>
+    </attribute-processor>
+
+    <attribute-processor name="node">
+        <restrictions tags="template:module,template:option,template:addCacheDependency,template:layoutManagerArea"/>
+    </attribute-processor>
+
+    <attribute-processor name="nodeName">
+        <restrictions tags="template:module"/>
+    </attribute-processor>
+
+    <attribute-processor name="templateType">
+        <restrictions tags="template:module,template:include"/>
+    </attribute-processor>
+
+    <attribute-processor name="view">
+        <restrictions tags="template:module,template:include"/>
+    </attribute-processor>
+
+    <attribute-processor name="editable">
+        <restrictions tags="template:module"/>
+    </attribute-processor>
+
+    <attribute-processor name="nodeTypes">
+        <restrictions tags="template:module"/>
+    </attribute-processor>
+
+    <attribute-processor name="contextSite">
+        <restrictions tags="template:module"/>
+    </attribute-processor>
+
+    <attribute-processor name="nodetype">
+        <restrictions tags="template:option"/>
+    </attribute-processor>
+
+    <attribute-processor name="type">
+        <restrictions tags="template:resources"/>
+    </attribute-processor>
+
+    <attribute-processor name="resources">
+        <restrictions tags="template:resources"/>
+    </attribute-processor>
+
+    <attribute-processor name="title">
+        <restrictions tags="template:resources"/>
+    </attribute-processor>
+
+    <attribute-processor name="key">
+        <restrictions tags="template:resources"/>
+    </attribute-processor>
+
+    <attribute-processor name="targetTag">
+        <restrictions tags="template:resources"/>
+    </attribute-processor>
+
+    <attribute-processor name="rel">
+        <restrictions tags="template:resources"/>
+    </attribute-processor>
+
+    <attribute-processor name="media">
+        <restrictions tags="template:resources"/>
+    </attribute-processor>
+
+    <attribute-processor name="condition">
+        <restrictions tags="template:resources"/>
+    </attribute-processor>
+
+    <attribute-processor name="listType">
+        <restrictions tags="template:resources"/>
+    </attribute-processor>
+
+
+    <!-- Jahia DX Thymeleaf element processors -->
+    <!-- ======================================= -->
+
+    <!-- Jahia DX Thymeleaf Expression Objects -->
+    <!-- ============================ -->
+
+    <expression-object name="facet" class="org.jahia.services.render.scripting.thymeleaf.expression.variables.FacetUtils"/>
+    <expression-object name="jcr" class="org.jahia.services.render.scripting.thymeleaf.expression.variables.JCRUtils"/>
+    <expression-object name="user" class="org.jahia.services.render.scripting.thymeleaf.expression.variables.UserUtils"/>
+    <expression-object name="worflow" class="org.jahia.services.render.scripting.thymeleaf.expression.variables.WorkflowUtils"/>
+    <expression-object name="function" class="org.jahia.services.render.scripting.thymeleaf.expression.variables.FunctionUtils"/>
+
+</dialect>
