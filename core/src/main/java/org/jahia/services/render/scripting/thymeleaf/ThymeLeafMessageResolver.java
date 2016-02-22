@@ -24,21 +24,17 @@ public class ThymeLeafMessageResolver extends AbstractMessageResolver {
         final Locale locale = arguments.getContext().getLocale();
         // here we use reflection to bypass class loading issues on the LocalizationContext class
         Object localizationContextObject = arguments.getContext().getVariables().get("javax.servlet.jsp.jstl.fmt.localizationContext" + ".request");
-        Method getResourceBundleMethod = null;
+        Method getResourceBundleMethod;
         String message = null;
         try {
-            getResourceBundleMethod = localizationContextObject.getClass().getMethod("getResourceBundle", null);
-            ResourceBundle resourceBundle = (ResourceBundle) getResourceBundleMethod.invoke(localizationContextObject, null);
+            getResourceBundleMethod = localizationContextObject.getClass().getMethod("getResourceBundle");
+            ResourceBundle resourceBundle = (ResourceBundle) getResourceBundleMethod.invoke(localizationContextObject);
 
             final String messageValue = resourceBundle.getString(key);
 
             final MessageFormat messageFormat = new MessageFormat(messageValue, locale);
             message = messageFormat.format((messageParameters != null? messageParameters : EMPTY_MESSAGE_PARAMETERS));
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
 

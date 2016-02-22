@@ -6,17 +6,16 @@ import org.thymeleaf.context.VariablesMap;
 import javax.script.Bindings;
 import javax.script.ScriptContext;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * Created by loom on 04.05.15.
  */
-public class ThymeLeafContext implements IContext {
+class ThymeLeafContext implements IContext {
 
-    VariablesMap<String,Object> variables = new VariablesMap<String, Object>();
-    Locale locale;
+    private final VariablesMap<String, Object> variables = new VariablesMap<String, Object>();
+    private final Locale locale;
 
-    public ThymeLeafContext(ScriptContext scriptContext) {
+    ThymeLeafContext(ScriptContext scriptContext) {
         Bindings globalBindings = scriptContext.getBindings(ScriptContext.GLOBAL_SCOPE);
         Bindings engineBindings = scriptContext.getBindings(ScriptContext.ENGINE_SCOPE);
         variables.putAll(globalBindings);

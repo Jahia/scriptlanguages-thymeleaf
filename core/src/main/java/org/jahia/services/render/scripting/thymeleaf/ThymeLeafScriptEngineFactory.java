@@ -17,17 +17,17 @@ import java.util.Map;
  */
 public class ThymeLeafScriptEngineFactory implements ScriptEngineFactory {
 
-    TemplateEngine templateEngine;
-    ThymeLeafResourceResolver thymeLeafResourceResolver = new ThymeLeafResourceResolver();
+    private TemplateEngine templateEngine;
+    private final ThymeLeafResourceResolver thymeLeafResourceResolver = new ThymeLeafResourceResolver();
 
-    private List<String> extensions = Collections.singletonList("html");
-    private List<String> names = Collections.singletonList("thymeleaf");
-    private List<String> mimeTypes = Collections.emptyList();
+    private final static List<String> extensions = Collections.singletonList("html");
+    private final static List<String> names = Collections.singletonList("thymeleaf");
+    private final static List<String> mimeTypes = Collections.emptyList();
     private Long templateCacheTTL = 3600000L;
     private String templateMode = "XHTML";
-    private TemplateResolver templateResolver = new TemplateResolver();
-    private IMessageResolver messageResolver = new ThymeLeafMessageResolver();
-    private Map<String, IDialect> additionalDialects = new HashMap<>();
+    private final TemplateResolver templateResolver = new TemplateResolver();
+    private final IMessageResolver messageResolver = new ThymeLeafMessageResolver();
+    private final Map<String, IDialect> additionalDialects = new HashMap<>();
 
     public ThymeLeafScriptEngineFactory() {
         templateResolver.setResourceResolver(thymeLeafResourceResolver);
