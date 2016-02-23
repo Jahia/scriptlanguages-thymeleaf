@@ -150,8 +150,8 @@ public abstract class ScriptingSupportService implements ScriptingService {
      * @param langCode the language to generate a link for
      * @return the language switching link for the specified language
      */
-    public static final String generateCurrentNodeLangSwitchLink(final RenderContext ctx,
-                                                                 final String langCode) {
+    private static String generateCurrentNodeLangSwitchLink(final RenderContext ctx,
+                                                            final String langCode) {
         if (ctx != null) {
             return ctx.getURLGenerator().getLanguages().get(langCode);
         } else {
@@ -168,7 +168,7 @@ public abstract class ScriptingSupportService implements ScriptingService {
      * @param langCode the language to generate a link for
      * @return the language switching link for the specified language
      */
-    public static final String generateNodeLangSwitchLink(final RenderContext ctx,
+    public static String generateNodeLangSwitchLink(final RenderContext ctx,
                                                           final JCRNodeWrapper node,
                                                           final String langCode) {
         if (node == null) {
@@ -191,7 +191,7 @@ public abstract class ScriptingSupportService implements ScriptingService {
      * @param ctx
      * @return the current user
      */
-    public static final JahiaUser getUser(final RenderContext ctx) {
+    public static JahiaUser getUser(final RenderContext ctx) {
         return ctx != null ? ctx.getUser() : null;
     }
 

@@ -32,37 +32,45 @@ public class RemovePagerService implements ScriptingService {
 
     @Override
     public Object doProcess() {
-        Map<String, Object> moduleMap = (HashMap<String, Object>) request.getAttribute(ScriptingConstants.ATTR_MODULE_MAP);
+        Map<String, Object> moduleMap = (Map<String, Object>) request
+                .getAttribute(ScriptingConstants.ATTR_MODULE_MAP);
         if (moduleMap == null) {
             moduleMap = new HashMap<String, Object>();
         }
-        Object value = moduleMap.get(ScriptingConstants.ATTR_OLD_BEGIN_PREFIX);
-        if (value != null) {
-            moduleMap.put(ScriptingConstants.ATTR_BEGIN, value);
+
+        final Object oldBegin = moduleMap.get(ScriptingConstants.ATTR_OLD_BEGIN_PREFIX + id);
+        if (oldBegin != null) {
+            moduleMap.put(ScriptingConstants.ATTR_BEGIN, oldBegin);
         }
-        value = moduleMap.get(ScriptingConstants.ATTR_OLD_END_PREFIX + id);
-        if (value != null) {
-            moduleMap.put(ScriptingConstants.ATTR_END, value);
+
+        final Object oldEnd = moduleMap.get(ScriptingConstants.ATTR_OLD_END_PREFIX + id);
+        if (oldEnd != null) {
+            moduleMap.put(ScriptingConstants.ATTR_END, oldEnd);
         }
-        value = moduleMap.get(ScriptingConstants.ATTR_OLD_PAGE_SIZE);
-        if (value != null) {
-            moduleMap.put(ScriptingConstants.ATTR_PAGE_SIZE, value);
+
+        final Object oldPageSize = moduleMap.get(ScriptingConstants.ATTR_OLD_PAGE_SIZE);
+        if (oldPageSize != null) {
+            moduleMap.put(ScriptingConstants.ATTR_PAGE_SIZE, oldPageSize);
         }
-        value = moduleMap.get(ScriptingConstants.ATTR_OLD_NB_PAGES_PREFIX + id);
-        if (value != null) {
-            moduleMap.put(ScriptingConstants.ATTR_NB_PAGES, value);
+
+        final Object oldNBPages = moduleMap.get(ScriptingConstants.ATTR_OLD_NB_PAGES_PREFIX + id);
+        if (oldNBPages != null) {
+            moduleMap.put(ScriptingConstants.ATTR_NB_PAGES, oldNBPages);
         }
-        value = moduleMap.get(ScriptingConstants.ATTR_OLD_CURRENT_PAGE_PREFIX + id);
-        if (value != null) {
-            moduleMap.put(ScriptingConstants.ATTR_CURRENT_PAGE, value);
+
+        final Object oldCurrentPage = moduleMap.get(ScriptingConstants.ATTR_OLD_CURRENT_PAGE_PREFIX + id);
+        if (oldCurrentPage != null) {
+            moduleMap.put(ScriptingConstants.ATTR_CURRENT_PAGE, oldCurrentPage);
         }
-        value = moduleMap.get(ScriptingConstants.ATTR_OLD_PAGINATION_ACTIVE_PREFIX + id);
-        if (value != null) {
-            moduleMap.put(ScriptingConstants.ATTR_PAGINATION_ACTIVE, value);
+
+        final Object oldPaginationActive = moduleMap.get(ScriptingConstants.ATTR_OLD_PAGINATION_ACTIVE_PREFIX + id);
+        if (oldPaginationActive != null) {
+            moduleMap.put(ScriptingConstants.ATTR_PAGINATION_ACTIVE, oldPaginationActive);
         }
-        value = moduleMap.get(ScriptingConstants.ATTR_OLD_TOTAL_SIZE_PREFIX + id);
-        if (value != null) {
-            moduleMap.put(ScriptingConstants.ATTR_TOTAL_SIZE, value);
+
+        final Object oldTotalSize = moduleMap.get(ScriptingConstants.ATTR_OLD_TOTAL_SIZE_PREFIX + id);
+        if (oldTotalSize != null) {
+            moduleMap.put(ScriptingConstants.ATTR_TOTAL_SIZE, oldTotalSize);
         }
         return null;
     }

@@ -28,7 +28,6 @@ import java.util.Set;
  * Created by smomin on 2/16/16.
  */
 public class UserUtils {
-
     private static final transient Logger LOGGER = LoggerFactory.getLogger(UserUtils.class);
 
     public UserUtils() {

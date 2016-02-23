@@ -43,48 +43,17 @@ public class InitPagerService implements ScriptingService {
 
     @Override
     public Object doProcess() {
-        Map<String, Object> moduleMap = (HashMap<String, Object>) request.getAttribute(ScriptingConstants.ATTR_MODULE_MAP);
-        if (moduleMap == null) {
-            moduleMap = new HashMap<String, Object>();
-        }
-        Object value = moduleMap.get(ScriptingConstants.ATTR_BEGIN);
-        if (value != null) {
-            moduleMap.put(ScriptingConstants.ATTR_OLD_BEGIN_PREFIX + id, value);
-        }
-        value = moduleMap.get(ScriptingConstants.ATTR_END);
-        if (value != null) {
-            moduleMap.put(ScriptingConstants.ATTR_OLD_END_PREFIX + id, value);
-        }
-        value = moduleMap.get(ScriptingConstants.ATTR_PAGE_SIZE);
-        if (value != null) {
-            moduleMap.put(ScriptingConstants.ATTR_OLD_PAGE_SIZE + id, value);
-        }
-        value = moduleMap.get(ScriptingConstants.ATTR_NB_PAGES);
-        if (value != null) {
-            moduleMap.put(ScriptingConstants.ATTR_OLD_NB_PAGES_PREFIX + id, value);
-        }
-        value = moduleMap.get(ScriptingConstants.ATTR_CURRENT_PAGE);
-        if (value != null) {
-            moduleMap.put(ScriptingConstants.ATTR_OLD_CURRENT_PAGE_PREFIX + id, value);
-        }
-        value = moduleMap.get(ScriptingConstants.ATTR_PAGINATION_ACTIVE);
-        if (value != null) {
-            moduleMap.put(ScriptingConstants.ATTR_OLD_PAGINATION_ACTIVE_PREFIX + id, value);
-        }
-        value = moduleMap.get(ScriptingConstants.ATTR_TOTAL_SIZE);
-        if (value != null) {
-            moduleMap.put(ScriptingConstants.ATTR_OLD_TOTAL_SIZE_PREFIX + id, value);
-        }
-        String beginStr = StringEscapeUtils.escapeXml(request.getParameter(ScriptingConstants.ATTR_BEGIN + id));
-        String endStr = StringEscapeUtils.escapeXml(request.getParameter(ScriptingConstants.ATTR_END + id));
+        final Map<String, Object> moduleMap = generateModuleMap();
+        final String beginStr = StringEscapeUtils.escapeXml(request.getParameter(ScriptingConstants.ATTR_BEGIN + id));
+        final String endStr = StringEscapeUtils.escapeXml(request.getParameter(ScriptingConstants.ATTR_END + id));
 
         if (request.getParameter(ScriptingConstants.ATTR_PAGESIZE + id) != null) {
-            pageSize = Integer.parseInt(StringEscapeUtils.escapeXml(request.getParameter(ScriptingConstants.ATTR_PAGESIZE + id)));
+            pageSize = Integer.parseInt(StringEscapeUtils.escapeXml(request
+                    .getParameter(ScriptingConstants.ATTR_PAGESIZE + id)));
         }
 
         int begin = beginStr == null ? 0 : Integer.parseInt(beginStr);
         int end = endStr == null ? pageSize - 1 : Integer.parseInt(endStr);
-
         int currentPage = begin / pageSize + 1;
 
         long nbPages = totalSize / pageSize;
@@ -115,12 +84,61 @@ public class InitPagerService implements ScriptingService {
         moduleMap.put(ScriptingConstants.ATTR_TOTAL_SIZE, totalSize);
         moduleMap.put(ScriptingConstants.ATTR_SIZE_NOT_EXACT, sizeNotExact);
         moduleMap.put(ScriptingConstants.ATTR_TOTAL_SIZE_UNKNOWN, totalSize == Integer.MAX_VALUE);
+
         request.setAttribute(ScriptingConstants.ATTR_MODULE_MAP, moduleMap);
         request.setAttribute(ScriptingConstants.ATTR_BEGIN_PREFIX + id, begin);
         request.setAttribute(ScriptingConstants.ATTR_END_PREFIX + id, end);
 
         moduleMap.put(ScriptingConstants.ATTR_REQUEST_ATTRIBUTES_TO_CACHE,
-                Arrays.asList(ScriptingConstants.ATTR_BEGIN_PREFIX + id, ScriptingConstants.ATTR_END_PREFIX + id));
+                Arrays.asList(ScriptingConstants.ATTR_BEGIN_PREFIX + id,
+                        ScriptingConstants.ATTR_END_PREFIX + id));
         return null;
+    }
+
+    /**
+     *
+     */
+    private Map<String, Object> generateModuleMap() {
+        Map<String, Object> moduleMap = (HashMap<String, Object>) request
+                .getAttribute(ScriptingConstants.ATTR_MODULE_MAP);
+        if (moduleMap == null) {
+            moduleMap = new HashMap<String, Object>();
+        }
+
+        final Object begin = moduleMap.get(ScriptingConstants.ATTR_BEGIN);
+        if (begin != null) {
+            moduleMap.put(ScriptingConstants.ATTR_OLD_BEGIN_PREFIX + id, begin);
+        }
+
+        final Object end = moduleMap.get(ScriptingConstants.ATTR_END);
+        if (end != null) {
+            moduleMap.put(ScriptingConstants.ATTR_OLD_END_PREFIX + id, end);
+        }
+
+        final Object pageSize = moduleMap.get(ScriptingConstants.ATTR_PAGE_SIZE);
+        if (pageSize != null) {
+            moduleMap.put(ScriptingConstants.ATTR_OLD_PAGE_SIZE + id, pageSize);
+        }
+
+        final Object nbPages = moduleMap.get(ScriptingConstants.ATTR_NB_PAGES);
+        if (nbPages != null) {
+            moduleMap.put(ScriptingConstants.ATTR_OLD_NB_PAGES_PREFIX + id, nbPages);
+        }
+
+        final Object currentPage = moduleMap.get(ScriptingConstants.ATTR_CURRENT_PAGE);
+        if (currentPage != null) {
+            moduleMap.put(ScriptingConstants.ATTR_OLD_CURRENT_PAGE_PREFIX + id, currentPage);
+        }
+
+        final Object paginataionActive = moduleMap.get(ScriptingConstants.ATTR_PAGINATION_ACTIVE);
+        if (paginataionActive != null) {
+            moduleMap.put(ScriptingConstants.ATTR_OLD_PAGINATION_ACTIVE_PREFIX + id, paginataionActive);
+        }
+
+        final Object totalSize = moduleMap.get(ScriptingConstants.ATTR_TOTAL_SIZE);
+        if (totalSize != null) {
+            moduleMap.put(ScriptingConstants.ATTR_OLD_TOTAL_SIZE_PREFIX + id, totalSize);
+        }
+        return moduleMap;
     }
 }

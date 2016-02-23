@@ -98,4 +98,11 @@ public class ScriptingConstants {
     public static final String ATTR_OPTIONS_AUTO_RENDERING = "optionsAutoRendering";
     public static final String ATTR_CURRENT_NODE = "currentNode";
     public static final String ATTR_OPTION_RESOURCE = "optionResource";
+    public static final String ATTR_UUID = "uuid";
+    public static final String ATTR_NAME = "name";
+    public static final String ATTR_VALUE = "value";
+    public static final String ATTR_OP = "op";
+    public static final String ATTR_TYPE = "type";
+    public static final String ATTR_STRING = "String";
+    public static final String ATTR_FORMAT = "format";
 }
