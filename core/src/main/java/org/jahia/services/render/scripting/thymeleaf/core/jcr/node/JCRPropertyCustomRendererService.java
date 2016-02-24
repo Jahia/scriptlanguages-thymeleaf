@@ -30,7 +30,6 @@ public class JCRPropertyCustomRendererService extends AbstractJCRService {
     private JCRNodeWrapper node;
     private String name;
     private String renderer;
-    private boolean rtnObject;
 
     /**
      * @param renderContext
@@ -45,13 +44,11 @@ public class JCRPropertyCustomRendererService extends AbstractJCRService {
                                             final String languageCode,
                                             final JCRNodeWrapper node,
                                             final String name,
-                                            final String renderer,
-                                            final boolean rtnObject) {
+                                            final String renderer) {
         super(renderContext, currentResource, languageCode);
         this.node = node;
         this.name = name;
         this.renderer = renderer;
-        this.rtnObject = rtnObject;
     }
 
     /**
@@ -67,7 +64,6 @@ public class JCRPropertyCustomRendererService extends AbstractJCRService {
      */
     @Override
     public Object doProcess() {
-        final StringBuilder out = new StringBuilder();
         try {
             final Property property = node.getProperty(name);
             if (property != null) {
@@ -76,43 +72,21 @@ public class JCRPropertyCustomRendererService extends AbstractJCRService {
                     final ChoiceListRenderer renderer1 = ChoiceListRendererService.getInstance()
                             .getRenderers().get(renderer);
                     final List<Map<String, Object>> rendererList = new ArrayList<Map<String, Object>>();
-                    Map<String, Object> rendererMap = new HashMap<String, Object>();
-                    String result = "";
+                    final Map<String, Object> rendererMap = new HashMap<String, Object>();
                     if (isMultiple) {
                         for (final Value v : property.getValues()) {
-                            if (rtnObject) {
-                                rendererList.add(renderer1.getObjectRendering(renderContext,
-                                        (ExtendedPropertyDefinition) property.getDefinition(), v.getString()));
-                            } else {
-                                result = (!"".equals(result) ? result + ", " : "") + renderer1
-                                        .getStringRendering(renderContext,
-                                                (ExtendedPropertyDefinition) property.getDefinition(), v.getString());
-                            }
+                            rendererList.add(renderer1.getObjectRendering(renderContext,
+                                    (ExtendedPropertyDefinition) property.getDefinition(), v.getString()));
                         }
                     } else {
-                        if (rtnObject) {
-                            rendererMap = renderer1.getObjectRendering(renderContext, (JCRPropertyWrapper) property);
-                        } else {
-                            result = renderer1.getStringRendering(renderContext, (JCRPropertyWrapper) property);
-                        }
+                        rendererMap.putAll(renderer1.getObjectRendering(renderContext, (JCRPropertyWrapper) property));
                     }
-                    if (rtnObject) {
-                        return isMultiple ? rendererList : rendererMap;
-                    } else {
-                        out.append(result);
-                    }
-                } else if (rtnObject) {
+                    return isMultiple ? rendererList : rendererMap;
+                } else {
                     if (isMultiple) {
                         return property.getValues();
                     } else {
                         return property.getValues();
-                    }
-                } else if (!isMultiple) {
-                    out.append(property.getValue().getString());
-                } else {
-                    final Value[] values1 = property.getValues();
-                    for (final Value value : values1) {
-                        out.append(value.getString()).append("<br/>");
                     }
                 }
             }
@@ -125,6 +99,6 @@ public class JCRPropertyCustomRendererService extends AbstractJCRService {
         } catch (RepositoryException e) {
             LOGGER.error(e.getMessage(), e);
         }
-        return out.toString();
+        return null;
     }
 }

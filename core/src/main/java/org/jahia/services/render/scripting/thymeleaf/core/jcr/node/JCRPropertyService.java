@@ -24,20 +24,17 @@ public class JCRPropertyService extends AbstractJCRService {
     private JCRNodeWrapper node;
     private String name;
     private boolean inherited;
-    private boolean rtnObject;
 
     public JCRPropertyService(final RenderContext renderContext, 
                               final Resource currentResource, 
                               final String languageCode, 
                               final JCRNodeWrapper node, 
                               final String name, 
-                              final boolean inherited,
-                              final boolean rtnObject) {
+                              final boolean inherited) {
         super(renderContext, currentResource, languageCode);
         this.node = node;
         this.name = name;
         this.inherited = inherited;
-        this.rtnObject = rtnObject;
     }
 
     @Override
@@ -53,16 +50,10 @@ public class JCRPropertyService extends AbstractJCRService {
                 if (curNode.hasProperty(name)) {
                     final Property property = curNode.getProperty(name);
                     if (property != null) {
-                        if (rtnObject) {
-                            if (property.getDefinition().isMultiple()) {
-                                return property.getValues();
-                            } else {
-                                return property.getValue();
-                            }
+                        if (property.getDefinition().isMultiple()) {
+                            return property.getValues();
                         } else {
-                            if (!property.getDefinition().isMultiple()) {
-                                return property.getValue().getString();
-                            }
+                            return property.getValue();
                         }
                     }
                 } else {
