@@ -10,92 +10,35 @@
 
     <!-- Jahia DX Thymeleaf attributes -->
     <!-- ======================================= -->
-    <!--<attribute-processor name="path">-->
-        <!--<restrictions tags="template:module,template:area,template:list,template:addCacheDependency"/>-->
-    <!--</attribute-processor>-->
-
-    <!--<attribute-processor name="node">-->
-        <!--<restrictions tags="template:module,template:option,template:addCacheDependency,template:layoutManagerArea"/>-->
-    <!--</attribute-processor>-->
-
-    <!--<attribute-processor name="nodeName">-->
-        <!--<restrictions tags="template:module"/>-->
-    <!--</attribute-processor>-->
-
-    <!--<attribute-processor name="templateType">-->
-        <!--<restrictions tags="template:module,template:include"/>-->
-    <!--</attribute-processor>-->
-
-    <!--<attribute-processor name="view">-->
-        <!--<restrictions tags="template:module,template:include"/>-->
-    <!--</attribute-processor>-->
-
-    <!--<attribute-processor name="editable">-->
-        <!--<restrictions tags="template:module"/>-->
-    <!--</attribute-processor>-->
-
-    <!--<attribute-processor name="nodeTypes">-->
-        <!--<restrictions tags="template:module"/>-->
-    <!--</attribute-processor>-->
-
-    <!--<attribute-processor name="contextSite">-->
-        <!--<restrictions tags="template:module"/>-->
-    <!--</attribute-processor>-->
-
-    <!--<attribute-processor name="nodetype">-->
-        <!--<restrictions tags="template:option"/>-->
-    <!--</attribute-processor>-->
-
-    <!--<attribute-processor name="type">-->
-        <!--<restrictions tags="template:resources"/>-->
-    <!--</attribute-processor>-->
-
-    <!--<attribute-processor name="resources">-->
-        <!--<restrictions tags="template:resources"/>-->
-    <!--</attribute-processor>-->
-
-    <!--<attribute-processor name="title">-->
-        <!--<restrictions tags="template:resources"/>-->
-    <!--</attribute-processor>-->
-
-    <!--<attribute-processor name="key">-->
-        <!--<restrictions tags="template:resources"/>-->
-    <!--</attribute-processor>-->
-
-    <!--<attribute-processor name="targetTag">-->
-        <!--<restrictions tags="template:resources"/>-->
-    <!--</attribute-processor>-->
-
-    <!--<attribute-processor name="rel">-->
-        <!--<restrictions tags="template:resources"/>-->
-    <!--</attribute-processor>-->
-
-    <!--<attribute-processor name="media">-->
-        <!--<restrictions tags="template:resources"/>-->
-    <!--</attribute-processor>-->
-
-    <!--<attribute-processor name="condition">-->
-        <!--<restrictions tags="template:resources"/>-->
-    <!--</attribute-processor>-->
 
 
     <!-- Jahia DX Thymeleaf element processors -->
     <!-- ======================================= -->
 
     <element-processor name="module"
-                       class="org.jahia.services.render.scripting.thymeleaf.include.ModuleElementProcessor"/>
+                       class="org.jahia.services.render.scripting.thymeleaf.template.include.ModuleElementProcessor"/>
     <element-processor name="area"
-                       class="org.jahia.services.render.scripting.thymeleaf.include.AreaElementProcessor"/>
+                       class="org.jahia.services.render.scripting.thymeleaf.template.include.AreaElementProcessor"/>
     <element-processor name="list"
-                       class="org.jahia.services.render.scripting.thymeleaf.include.ListElementProcessor"/>
+                       class="org.jahia.services.render.scripting.thymeleaf.template.include.ListElementProcessor"/>
     <element-processor name="include"
-                       class="org.jahia.services.render.scripting.thymeleaf.include.IncludeElementProcessor"/>
+                       class="org.jahia.services.render.scripting.thymeleaf.template.include.IncludeElementProcessor"/>
     <element-processor name="add-resources"
-                       class="org.jahia.services.render.scripting.thymeleaf.include.AddResourcesElementProcessor"/>
+                       class="org.jahia.services.render.scripting.thymeleaf.template.include.AddResourcesElementProcessor"/>
     <element-processor name="add-cache-dependency"
-                       class="org.jahia.services.render.scripting.thymeleaf.include.AddCacheDependencyElementProcessor"/>
+                       class="org.jahia.services.render.scripting.thymeleaf.template.include.AddCacheDependencyElementProcessor"/>
     <element-processor name="add-wrapper"
-                       class="org.jahia.services.render.scripting.thymeleaf.include.AddWrapperElementProcessor"/>
+                       class="org.jahia.services.render.scripting.thymeleaf.template.include.AddWrapperElementProcessor"/>
+    <element-processor name="option"
+                       class="org.jahia.services.render.scripting.thymeleaf.template.include.OptionElementProcessor"/>
+    <element-processor name="init-pager"
+                       class="org.jahia.services.render.scripting.thymeleaf.template.pager.InitPagerElementProcessor"/>
+    <element-processor name="remove-pager"
+                       class="org.jahia.services.render.scripting.thymeleaf.template.pager.RemovePagerElementProcessor"/>
+    <element-processor name="captcha"
+                       class="org.jahia.services.render.scripting.thymeleaf.template.CaptchaElementProcessor"/>
+    <element-processor name="tokenized-form"
+                       class="org.jahia.services.render.scripting.thymeleaf.template.TokenizedFormElementProcessor"/>
 
     <!-- Jahia DX Thymeleaf Expression Objects -->
     <!-- ============================ -->

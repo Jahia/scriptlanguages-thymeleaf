@@ -1,4 +1,4 @@
-package org.jahia.services.render.scripting.thymeleaf.include;
+package org.jahia.services.render.scripting.thymeleaf.template.include;
 
 import org.apache.commons.lang.StringUtils;
 import org.jahia.services.content.JCRNodeWrapper;
@@ -12,7 +12,7 @@ import org.thymeleaf.Arguments;
 import org.thymeleaf.Configuration;
 import org.thymeleaf.dom.Attribute;
 import org.thymeleaf.dom.Element;
-import org.thymeleaf.processor.element.AbstractUnescapedTextChildModifierElementProcessor;
+import org.thymeleaf.processor.element.AbstractNoOpElementProcessor;
 import org.thymeleaf.standard.expression.IStandardExpressionParser;
 import org.thymeleaf.standard.expression.StandardExpressions;
 
@@ -21,15 +21,22 @@ import java.util.Map;
 /**
  * Created by smomin on 2/9/16.
  */
-public class AddCacheDependencyElementProcessor extends AbstractUnescapedTextChildModifierElementProcessor {
+public class AddCacheDependencyElementProcessor extends AbstractNoOpElementProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(AddCacheDependencyElementProcessor.class);
+    private static final String ADD_CACHE_DEPENDENCY = "add-cache-dependency";
 
     public AddCacheDependencyElementProcessor() {
-        super("add-cache-dependency");
+        super(ADD_CACHE_DEPENDENCY);
     }
 
+    /**
+     *
+     * @param arguments
+     * @param element
+     * @return
+     */
     @Override
-    protected String getText(final Arguments arguments, final Element element) {
+    protected boolean removeHostElement(final Arguments arguments, final Element element) {
         final ThymeLeafContext context = (ThymeLeafContext) arguments.getContext();
         final String uuid = element.getAttributeValue(ScriptingConstants
                 .DX_ATTR_UUID);
@@ -41,7 +48,8 @@ public class AddCacheDependencyElementProcessor extends AbstractUnescapedTextChi
         final Configuration configuration = arguments.getConfiguration();
         final Map<String, Attribute> attributeMap = element.getAttributeMap();
         final IStandardExpressionParser parser = StandardExpressions.getExpressionParser(configuration);
-        final JCRNodeWrapper node = ProcessorUtil.getJcrNodeWrapper(arguments, element, attributeMap, configuration, parser);
+        final JCRNodeWrapper node = ProcessorUtil.getJcrNodeWrapper(arguments, element,
+                attributeMap, configuration, parser);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("uuid is {}", uuid);
@@ -50,21 +58,23 @@ public class AddCacheDependencyElementProcessor extends AbstractUnescapedTextChi
         }
 
         if (node != null) {
-            return new AddCacheDependencyService(context.getCurrentResource(),
+            new AddCacheDependencyService(context.getCurrentResource(),
                     context.getOptionalResource(),
                     node).doProcess();
         } else if (StringUtils.isNotEmpty(uuid)
                 || StringUtils.isNotEmpty(stringDependency)
                 || StringUtils.isNotEmpty(flushOnPathMatchingRegexp)) {
-            return new AddCacheDependencyService(context.getCurrentResource(),
+            new AddCacheDependencyService(context.getCurrentResource(),
                     context.getOptionalResource(),
                     flushOnPathMatchingRegexp,
                     stringDependency,
                     uuid).doProcess();
         } else {
-            return new AddCacheDependencyService(context.getCurrentResource(),
+            new AddCacheDependencyService(context.getCurrentResource(),
                     context.getOptionalResource()).doProcess();
         }
+
+        return true;
     }
 
     @Override

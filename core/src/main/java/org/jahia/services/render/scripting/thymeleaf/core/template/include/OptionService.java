@@ -42,24 +42,19 @@ public class OptionService implements ScriptingService {
 
     public OptionService(final RenderContext renderContext,
                          final Resource currentResource,
-                         final String nodetype,
                          final JCRNodeWrapper node,
+                         final String nodetype,
                          final String view,
                          final Map<String, String> parameters) {
         this.renderContext = renderContext;
         this.currentResource = currentResource;
-        this.nodetype = nodetype;
         this.node = node;
+        this.nodetype = nodetype;
         this.view = view;
         this.parameters = parameters;
 
         request = renderContext.getRequest();
         response = renderContext.getResponse();
-    }
-
-    @Override
-    public void init() {
-
     }
 
     @Override

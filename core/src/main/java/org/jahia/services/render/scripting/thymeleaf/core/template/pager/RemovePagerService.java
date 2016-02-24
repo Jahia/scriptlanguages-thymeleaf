@@ -26,11 +26,6 @@ public class RemovePagerService implements ScriptingService {
     }
 
     @Override
-    public void init() {
-
-    }
-
-    @Override
     public Object doProcess() {
         Map<String, Object> moduleMap = (Map<String, Object>) request
                 .getAttribute(ScriptingConstants.ATTR_MODULE_MAP);

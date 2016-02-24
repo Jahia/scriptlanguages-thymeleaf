@@ -48,14 +48,6 @@ public class AddCacheDependencyService implements ScriptingService {
 
     /**
      *
-     */
-    @Override
-    public void init() {
-        // Nothing to initialize
-    }
-
-    /**
-     *
      * @return
      */
     @Override

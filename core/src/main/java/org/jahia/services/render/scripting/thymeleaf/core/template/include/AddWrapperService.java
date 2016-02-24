@@ -21,11 +21,6 @@ public class AddWrapperService implements ScriptingService {
     }
 
     @Override
-    public void init() {
-
-    }
-
-    @Override
     public String doProcess() {
         currentResource.pushWrapper(name);
         return "";

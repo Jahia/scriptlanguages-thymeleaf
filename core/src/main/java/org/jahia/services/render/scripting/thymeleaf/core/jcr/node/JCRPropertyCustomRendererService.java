@@ -52,14 +52,6 @@ public class JCRPropertyCustomRendererService extends AbstractJCRService {
     }
 
     /**
-     *
-     */
-    @Override
-    public void init() {
-
-    }
-
-    /**
      * @return
      */
     @Override

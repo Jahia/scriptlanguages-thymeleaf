@@ -66,6 +66,24 @@ public final class ProcessorUtil {
     /**
      * @param element
      * @param attributeMap
+     * @param key
+     * @param defaultValue
+     * @return
+     */
+    public static Long getLongValue(final Element element,
+                                    final Map<String, Attribute> attributeMap,
+                                    final String key,
+                                    final Long defaultValue) {
+        if (attributeMap.containsKey(key)) {
+            return Long.parseLong(element.getAttributeValue(key));
+        } else {
+            return defaultValue;
+        }
+    }
+
+    /**
+     * @param element
+     * @param attributeMap
      * @return
      */
     public static boolean getBooleanValue(final Element element,

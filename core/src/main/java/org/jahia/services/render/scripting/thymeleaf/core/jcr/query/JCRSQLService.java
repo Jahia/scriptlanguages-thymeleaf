@@ -40,11 +40,6 @@ public class JCRSQLService extends AbstractJCRService {
     }
 
     @Override
-    public void init() {
-        
-    }
-
-    @Override
     public Object doProcess() {
         QueryResult result = null;
         JahiaUser userToReset = null;

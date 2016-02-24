@@ -63,11 +63,6 @@ public class JCRPropertyInitializerService extends AbstractJCRService {
     }
 
     @Override
-    public void init() {
-
-    }
-
-    @Override
     public Object doProcess() {
         try {
             ExtendedNodeType type = null;

@@ -37,11 +37,6 @@ public class InitPagerService implements ScriptingService {
     }
 
     @Override
-    public void init() {
-
-    }
-
-    @Override
     public Object doProcess() {
         final Map<String, Object> moduleMap = generateModuleMap();
         final String beginStr = StringEscapeUtils.escapeXml(request.getParameter(ScriptingConstants.ATTR_BEGIN + id));

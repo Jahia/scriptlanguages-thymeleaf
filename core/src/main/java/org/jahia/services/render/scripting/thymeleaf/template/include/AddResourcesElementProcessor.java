@@ -1,4 +1,4 @@
-package org.jahia.services.render.scripting.thymeleaf.include;
+package org.jahia.services.render.scripting.thymeleaf.template.include;
 
 import org.jahia.services.render.scripting.thymeleaf.ScriptingConstants;
 import org.jahia.services.render.scripting.thymeleaf.ThymeLeafContext;
@@ -20,9 +20,10 @@ import java.util.Map;
  */
 public class AddResourcesElementProcessor extends AbstractUnescapedTextChildModifierElementProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(AddResourcesElementProcessor.class);
+    private static final String ADD_RESOURCES = "add-resources";
 
     public AddResourcesElementProcessor() {
-        super("add-resources");
+        super(ADD_RESOURCES);
     }
 
     @Override

@@ -48,7 +48,9 @@ public class JCRSortService extends AbstractJCRService {
         this.list = list;
     }
 
-    @Override
+    /**
+     *
+     */
     public void init() {
         if (list instanceof Collection) {
             this.nodeList = (Collection) list;

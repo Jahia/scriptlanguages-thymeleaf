@@ -29,14 +29,6 @@ public class JCRNodeVersionService extends ScriptingSupportService {
 
     /**
      *
-     */
-    @Override
-    public void init() {
-
-    }
-
-    /**
-     *
      * @return
      */
     @Override

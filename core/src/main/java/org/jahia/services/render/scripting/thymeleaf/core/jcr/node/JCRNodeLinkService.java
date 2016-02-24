@@ -43,7 +43,6 @@ public class JCRNodeLinkService extends AbstractJCRService {
     /**
      *
      */
-    @Override
     public void init() {
         try {
             node = getJCRSession().getNode(path);

@@ -38,11 +38,6 @@ public class JCRPropertyService extends AbstractJCRService {
     }
 
     @Override
-    public void init() {
-        
-    }
-
-    @Override
     public Object doProcess() {
         JCRNodeWrapper curNode = node;
         while (true) {

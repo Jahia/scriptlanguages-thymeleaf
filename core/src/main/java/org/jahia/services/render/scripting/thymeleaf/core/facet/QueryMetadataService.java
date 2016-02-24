@@ -88,11 +88,6 @@ public class QueryMetadataService extends ScriptingSupportService {
         this.facetValueRenderers = facetValueRenderers;
     }
 
-    @Override
-    public void init() {
-
-    }
-
     /**
      *
      * @return
@@ -262,7 +257,7 @@ public class QueryMetadataService extends ScriptingSupportService {
                 if (!isFacetApplied) {
                     // key used in the solr query string
                     final String key = isQuery ? facet.getName() : facetPropertyName;
-                    String query = buildQueryString(facetNodeTypeName, key, minCount, extra);
+                    final String query = buildQueryString(facetNodeTypeName, key, minCount, extra);
                     final String columnPropertyName = StringUtils.isNotEmpty(facetPropertyName) ? facetPropertyName : "rep:facet()";
                     qomBuilder.getColumns().add(factory.column(selectorName, columnPropertyName, query));
                 }
@@ -280,7 +275,7 @@ public class QueryMetadataService extends ScriptingSupportService {
 
             return qomBuilder.createQOM();
         } catch (RepositoryException e) {
-
+            LOGGER.warn(e.getMessage());
         }
         return null;
     }

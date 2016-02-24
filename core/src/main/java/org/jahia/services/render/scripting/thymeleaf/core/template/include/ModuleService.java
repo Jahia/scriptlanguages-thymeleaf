@@ -224,7 +224,6 @@ public class ModuleService implements ScriptingService {
     /**
      *
      */
-    @Override
     public void init() {
         // Begin: The two lines below were in the doStartTag, not sure how to emulate this in Thymeleaf processor
         final Integer level = (Integer) request.getAttribute(ScriptingConstants.ATTR_ORG_JAHIA_MODULES_LEVEL);

@@ -83,14 +83,6 @@ public class AddResourceService implements ScriptingService {
 
     /**
      * 
-     */
-    @Override
-    public void init() {
-        
-    }
-
-    /**
-     * 
      * @return
      */
     @Override

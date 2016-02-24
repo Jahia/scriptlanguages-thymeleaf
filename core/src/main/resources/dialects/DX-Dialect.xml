@@ -10,11 +10,23 @@
     <!-- Jahia DX Thymeleaf attributes -->
     <!-- ======================================= -->
     <attribute-processor name="path">
-        <restrictions tags="template:module,template:area,template:list,template:addCacheDependency"/>
+        <restrictions tags="template:module template:area template:list template:add-cache-dependency"/>
     </attribute-processor>
 
     <attribute-processor name="node">
-        <restrictions tags="template:module,template:option,template:addCacheDependency,template:layoutManagerArea"/>
+        <restrictions tags="template:module template:option template:add-cache-dependency"/>
+    </attribute-processor>
+    
+    <attribute-processor name="uuid">
+        <restrictions tags="template:add-cache-dependency"/>
+    </attribute-processor>
+    
+    <attribute-processor name="moduleType">
+        <restrictions tags="template:area"/>
+    </attribute-processor>
+
+    <attribute-processor name="flushOnPathMatchingRegexp">
+        <restrictions tags="template:add-cache-dependency"/>
     </attribute-processor>
 
     <attribute-processor name="nodeName">
@@ -22,19 +34,39 @@
     </attribute-processor>
 
     <attribute-processor name="templateType">
-        <restrictions tags="template:module,template:include"/>
+        <restrictions tags="template:module template:area template:include template:list"/>
     </attribute-processor>
 
     <attribute-processor name="view">
-        <restrictions tags="template:module,template:include"/>
+        <restrictions tags="template:module template:include template:area template:list template:option"/>
     </attribute-processor>
 
     <attribute-processor name="editable">
-        <restrictions tags="template:module"/>
+        <restrictions tags="template:module template:area template:list"/>
     </attribute-processor>
 
     <attribute-processor name="nodeTypes">
-        <restrictions tags="template:module"/>
+        <restrictions tags="template:module template:area template:list"/>
+    </attribute-processor>
+    
+    <attribute-processor name="listLimit">
+        <restrictions tags="template:area"/>
+    </attribute-processor>
+
+    <attribute-processor name="level">
+        <restrictions tags="template:area"/>
+    </attribute-processor>
+
+    <attribute-processor name="areaAsSubNode">
+        <restrictions tags="template:area"/>
+    </attribute-processor>
+
+    <attribute-processor name="areaType">
+        <restrictions tags="template:area"/>
+    </attribute-processor>
+
+    <attribute-processor name="limitedAbsoluteAreaEdit">
+        <restrictions tags="template:area"/>
     </attribute-processor>
 
     <attribute-processor name="contextSite">
@@ -46,39 +78,78 @@
     </attribute-processor>
 
     <attribute-processor name="type">
-        <restrictions tags="template:resources"/>
+        <restrictions tags="template:add-resources"/>
     </attribute-processor>
 
     <attribute-processor name="resources">
-        <restrictions tags="template:resources"/>
+        <restrictions tags="template:add-resources"/>
     </attribute-processor>
 
     <attribute-processor name="title">
-        <restrictions tags="template:resources"/>
+        <restrictions tags="template:add-resources"/>
     </attribute-processor>
 
     <attribute-processor name="key">
-        <restrictions tags="template:resources"/>
+        <restrictions tags="template:add-resources"/>
     </attribute-processor>
 
     <attribute-processor name="targetTag">
-        <restrictions tags="template:resources"/>
+        <restrictions tags="template:add-resources"/>
     </attribute-processor>
 
     <attribute-processor name="rel">
-        <restrictions tags="template:resources"/>
+        <restrictions tags="template:add-resources"/>
     </attribute-processor>
 
     <attribute-processor name="media">
-        <restrictions tags="template:resources"/>
+        <restrictions tags="template:add-resources"/>
     </attribute-processor>
 
     <attribute-processor name="condition">
-        <restrictions tags="template:resources"/>
+        <restrictions tags="template:add-resources"/>
     </attribute-processor>
 
     <attribute-processor name="listType">
-        <restrictions tags="template:resources"/>
+        <restrictions tags="template:add-resources template:list"/>
+    </attribute-processor>
+
+    <attribute-processor name="stringDependency">
+    </attribute-processor>
+
+    <attribute-processor name="id">
+        <restrictions tags="template:remove-pager template:init-pager"/>
+    </attribute-processor>
+
+    <attribute-processor name="pageSize">
+        <restrictions tags="template:init-pager"/>
+    </attribute-processor>
+
+    <attribute-processor name="totalSize">
+        <restrictions tags="template:init-pager"/>
+    </attribute-processor>
+
+    <attribute-processor name="sizeNotExact">
+        <restrictions tags="template:init-pager"/>
+    </attribute-processor>
+
+    <attribute-processor name="display">
+        <restrictions tags="template:captcha"/>
+    </attribute-processor>
+
+    <attribute-processor name="displayReloadLink">
+        <restrictions tags="template:captcha"/>
+    </attribute-processor>
+
+    <attribute-processor name="disableXSSFiltering">
+        <restrictions tags="template:tokenized-form"/>
+    </attribute-processor>
+
+    <attribute-processor name="allowsMultipleSubmits">
+        <restrictions tags="template:tokenized-form"/>
+    </attribute-processor>
+
+    <attribute-processor name="name">
+        <restrictions tags="template:add-wrapper"/>
     </attribute-processor>
 
 

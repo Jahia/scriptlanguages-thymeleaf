@@ -58,7 +58,6 @@ public class JCRFilterService extends AbstractJCRService {
     /**
      *
      */
-    @Override
     public void init() {
         if (list instanceof Collection) {
             this.nodeList = new ArrayList<JCRNodeWrapper>((Collection<? extends JCRNodeWrapper>) list);

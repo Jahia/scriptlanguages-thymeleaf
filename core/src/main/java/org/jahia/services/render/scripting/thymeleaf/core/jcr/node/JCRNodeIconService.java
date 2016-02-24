@@ -40,11 +40,6 @@ public class JCRNodeIconService extends AbstractJCRService {
     }
 
     @Override
-    public void init() {
-
-    }
-
-    @Override
     public String doProcess() {
         try {
             if (node != null) {

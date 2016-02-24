@@ -42,7 +42,27 @@ public class ScriptingConstants {
     public static final String DX_ATTR_PARAMS = "dx:params";
     public static final String DX_ATTR_FLUSH_ON_PATH_MATCHING_REGEXP = "dx:flushOnPathMatchingRegexp";
     public static final String DX_ATTR_LIST_TYPE = "dx:listType";
-    public static final String DX_ATTR_STRING_DEPENDENCY = "stringDependency";
+    public static final String DX_ATTR_STRING_DEPENDENCY = "dx:stringDependency";
+    public static final String DX_ATTR_ID = "dx:id";
+    public static final String DX_ATTR_PAGE_SIZE = "dx:pageSize";
+    public static final String DX_ATTR_TOTAL_SIZE = "dx:totalSize";
+    public static final String DX_ATTR_SIZE_NOT_EXACT = "dx:sizeNotExact";
+    public static final String DX_ATTR_DISPLAY = "dx:display";
+    public static final String DX_ATTR_DISPLAY_RELOAD_LINK = "dx:displayReloadLink";
+    public static final String DX_ATTR_DISABLE_XSS_FILTERING = "dx:disableXSSFiltering";
+    public static final String DX_ATTR_ALLOW_MULTIPLE_SUBMITS = "dx:allowsMultipleSubmits";
+
+    public static final String MIX_JMIX_SKIP_CONSTRAINT_CHECK = "jmix:skipConstraintCheck";
+    public static final String MIX_JMIX_EDITORIAL_CONTENT = "jmix:editorialContent";
+    public static final String MIX_JMIX_LIST_CONTENT = "jmix:listContent";
+
+    public static final String NT_JNT_TEMPLATE = "jnt:template";
+    public static final String NT_JNT_CONTENT_LIST = "jnt:contentList";
+    public static final String NT_JNT_CONTENT_REFERENCE = "jnt:contentReference";
+
+    public static final String MODULE_TYPE_AREA = "area";
+    public static final String MODULE_TYPE_ABSOLUTE_AREA = "absoluteArea";
+    public static final String MODULE_TYPE_LIST = "list";
 
     public static final String ATTR_ORG_JAHIA_MODULES_LEVEL = "org.jahia.modules.level";
     public static final String ATTR_RESOURCE_NODE_TYPE = "resourceNodeType";
@@ -57,18 +77,6 @@ public class ScriptingConstants {
     public static final String ATTR_TEMPLATE_EDIT = "templateEdit";
     public static final String ATTR_HAS_CAPTCHA = "hasCaptcha";
     public static final String ATTR_CURRENT_FORM_ID = "currentFormId";
-
-    public static final String MIX_JMIX_SKIP_CONSTRAINT_CHECK = "jmix:skipConstraintCheck";
-    public static final String MIX_JMIX_EDITORIAL_CONTENT = "jmix:editorialContent";
-    public static final String MIX_JMIX_LIST_CONTENT = "jmix:listContent";
-
-    public static final String NT_JNT_TEMPLATE = "jnt:template";
-    public static final String NT_JNT_CONTENT_LIST = "jnt:contentList";
-    public static final String NT_JNT_CONTENT_REFERENCE = "jnt:contentReference";
-
-    public static final String MODULE_TYPE_AREA = "area";
-    public static final String MODULE_TYPE_ABSOLUTE_AREA = "absoluteArea";
-    public static final String MODULE_TYPE_LIST = "list";
     public static final String ATTR_BEGIN = "begin";
     public static final String ATTR_OLD_BEGIN_PREFIX = "old_begin";
     public static final String ATTR_END = "end";
@@ -90,7 +98,6 @@ public class ScriptingConstants {
     public static final String ATTR_MODULE_MAP = "moduleMap";
     public static final String ATTR_BEGIN_PREFIX = "begin_";
     public static final String ATTR_END_PREFIX = "end_";
-
     public static final String ATTR_CURRENT_LOCALE = "currentLocale";
     public static final String ATTR_CURRENT_RESOURCE = "currentResource";
     public static final String ATTR_OPTIONAL_RESOURCE = "optionalResource";

@@ -46,7 +46,6 @@ public class TokenizedFormService implements ScriptingService {
         this.allowsMultipleSubmits = allowsMultipleSubmits;
     }
 
-    @Override
     public void init() {
         final String id = java.util.UUID.randomUUID().toString();
         request.setAttribute(ScriptingConstants.ATTR_CURRENT_FORM_ID, id);

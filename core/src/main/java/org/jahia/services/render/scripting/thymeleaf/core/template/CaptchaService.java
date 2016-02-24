@@ -33,11 +33,6 @@ public class CaptchaService implements ScriptingService {
     }
 
     @Override
-    public void init() {
-
-    }
-
-    @Override
     public String doProcess() {
         final StringBuilder out = new StringBuilder();
         final URLGenerator urlGen = (URLGenerator) request.getAttribute("url");
