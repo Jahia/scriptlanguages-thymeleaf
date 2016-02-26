@@ -120,4 +120,9 @@ public class ThymeLeafScriptEngineFactoryConfigurator implements BundleScriptEng
     public void destroy(final ThymeLeafScriptEngineFactory factory) {
         dialectServiceTracker.close();
     }
+
+    @Override
+    public void configurePreScriptEngineCreation(ThymeLeafScriptEngineFactory scriptEngineFactory) {
+        // nothing to do
+    }
 }
