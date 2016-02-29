@@ -41,7 +41,7 @@ class ThymeLeafScriptEngine extends AbstractScriptEngine {
         try {
             context.getWriter().append(result);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ScriptException(e);
         }
         thymeLeafResourceResolver.removeScript(templateName);
         return result;
@@ -49,9 +49,6 @@ class ThymeLeafScriptEngine extends AbstractScriptEngine {
 
     @Override
     public Object eval(Reader reader, ScriptContext context) throws ScriptException {
-        ThymeLeafContext templateContext = new ThymeLeafContext(context);
-        invocationCounts++;
-        String templateName = "template-" + invocationCounts + System.currentTimeMillis();
         StringBuilder script = new StringBuilder();
         BufferedReader bufferedReader = new BufferedReader(reader);
         try {
@@ -59,20 +56,12 @@ class ThymeLeafScriptEngine extends AbstractScriptEngine {
                 script.append(bufferedReader.readLine());
                 script.append("\n");
             }
+            return eval(script.toString());
         } catch (IOException ioe) {
-            ioe.printStackTrace();
+            throw new ScriptException(ioe);
         } finally {
             IOUtils.closeQuietly(bufferedReader);
         }
-        thymeLeafResourceResolver.putScript(templateName, script.toString());
-        String result = templateEngine.process(templateName, templateContext);
-        try {
-            context.getWriter().append(result);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        thymeLeafResourceResolver.removeScript(templateName);
-        return result;
     }
 
     @Override

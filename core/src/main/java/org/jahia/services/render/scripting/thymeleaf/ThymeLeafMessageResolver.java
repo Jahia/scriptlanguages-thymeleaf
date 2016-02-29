@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 /**
  * Created by loom on 05.05.15.
  */
-public class ThymeLeafMessageResolver extends AbstractMessageResolver {
+class ThymeLeafMessageResolver extends AbstractMessageResolver {
 
     private static final Object[] EMPTY_MESSAGE_PARAMETERS = new Object[0];
 
