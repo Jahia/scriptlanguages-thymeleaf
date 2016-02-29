@@ -1,8 +1,6 @@
 # scriptlanguages-thymeleaf
 
-A experimental module that provides basic Thymeleaf scripting language support. This module should mostly be considered
-as a proof-of-concept because it contains some hacks to get this working properly. It is not recommended to use this
-code in production environment
+A experimental module that provides basic Thymeleaf scripting language support. This module hasn't gone through Jahia's rigorous QA process and is therefore not supported.
 
 ## Features
 - Makes it possible to use Thymeleaf as a scripting languages for Jahia views
@@ -62,7 +60,7 @@ a Spring descriptor file.
 You will this file inside the examples project in: examples/src/main/resources/META-INF/spring/mod-scriptlanguages-thymeleaf-examples.xml
 
 ## TODO
-- Remove all hacks by modifying Jahia core to enable dynamic deployment of new scripting language support
+
 - Remove hack to access localization context in ThymeLeafMessageResolver
 - Test and improve overall performance, as not much caching is present
 - Test, test, test :)
