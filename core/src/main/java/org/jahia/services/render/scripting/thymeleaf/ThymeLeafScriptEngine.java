@@ -56,7 +56,7 @@ class ThymeLeafScriptEngine extends AbstractScriptEngine {
                 script.append(bufferedReader.readLine());
                 script.append("\n");
             }
-            return eval(script.toString());
+            return eval(script.toString(), context);
         } catch (IOException ioe) {
             throw new ScriptException(ioe);
         } finally {
