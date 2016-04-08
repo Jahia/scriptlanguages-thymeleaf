@@ -70,17 +70,13 @@
     <build>
         <plugins>
             <plugin>
-                <!-- Remove this plugin when this module is updated for Jahia 7.1 -->
-                <groupId>org.jahia.server</groupId>
-                <artifactId>jahia-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
                         <Jahia-Depends>default,scriptlanguages-thymeleaf</Jahia-Depends>
+                        <Jahia-Module-Scripting-Views>thymeleaf</Jahia-Module-Scripting-Views>
                         <Embed-Dependency>*; scope=compile|runtime; type=!pom; inline=false</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                         <Dynamic-ImportPackage>*</Dynamic-ImportPackage>

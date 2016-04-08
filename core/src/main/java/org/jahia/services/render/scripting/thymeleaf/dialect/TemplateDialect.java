@@ -1,12 +1,12 @@
 package org.jahia.services.render.scripting.thymeleaf.dialect;
 
 import org.jahia.services.render.scripting.thymeleaf.expression.JahiaVariableExpressionEvaluator;
-import org.jahia.services.render.scripting.thymeleaf.include.AddCacheDependencyElementProcessor;
-import org.jahia.services.render.scripting.thymeleaf.include.AddResourcesElementProcessor;
-import org.jahia.services.render.scripting.thymeleaf.include.AddWrapperElementProcessor;
-import org.jahia.services.render.scripting.thymeleaf.include.AreaElementProcessor;
-import org.jahia.services.render.scripting.thymeleaf.include.IncludeElementProcessor;
-import org.jahia.services.render.scripting.thymeleaf.include.ModuleElementProcessor;
+import org.jahia.services.render.scripting.thymeleaf.template.include.AddCacheDependencyElementProcessor;
+import org.jahia.services.render.scripting.thymeleaf.template.include.AddResourcesElementProcessor;
+import org.jahia.services.render.scripting.thymeleaf.template.include.AddWrapperElementProcessor;
+import org.jahia.services.render.scripting.thymeleaf.template.include.AreaElementProcessor;
+import org.jahia.services.render.scripting.thymeleaf.template.include.IncludeElementProcessor;
+import org.jahia.services.render.scripting.thymeleaf.template.include.ModuleElementProcessor;
 import org.thymeleaf.dialect.AbstractDialect;
 import org.thymeleaf.processor.IProcessor;
 import org.thymeleaf.standard.expression.IStandardVariableExpressionEvaluator;

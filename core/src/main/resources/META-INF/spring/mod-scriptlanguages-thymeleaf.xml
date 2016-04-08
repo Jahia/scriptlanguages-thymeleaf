@@ -7,14 +7,6 @@
        http://www.springframework.org/schema/osgi
        http://www.springframework.org/schema/osgi/spring-osgi.xsd">
 
-    <bean id="scriptEngineFactory" class="org.jahia.services.render.scripting.thymeleaf.ThymeLeafScriptEngineFactory" />
-
-    <bean id="scriptEngineFactoryInitializer" class="org.jahia.services.render.scripting.thymeleaf.Activator">
-        <property name="scriptEngineFactory" ref="scriptEngineFactory" />
-        <property name="bundleScriptResolver" ref="BundleScriptResolver" />
-        <property name="bundleJSR223ScriptFactory" ref="BundleJSR223ScriptFactory" />
-    </bean>
-
     <bean id="templateThymeleafDialect" class="org.jahia.services.render.scripting.thymeleaf.dialect.TemplateDialect" />
     <osgi:service id="templateThymeleafDialectOsgiService" ref="templateThymeleafDialect" interface="org.thymeleaf.dialect.IDialect" />
 

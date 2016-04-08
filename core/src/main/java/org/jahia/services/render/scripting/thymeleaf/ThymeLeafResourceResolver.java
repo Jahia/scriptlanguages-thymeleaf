@@ -1,7 +1,6 @@
 package org.jahia.services.render.scripting.thymeleaf;
 
 import org.thymeleaf.TemplateProcessingParameters;
-import org.thymeleaf.context.IContext;
 import org.thymeleaf.resourceresolver.IResourceResolver;
 import org.thymeleaf.util.ClassLoaderUtils;
 
@@ -14,9 +13,9 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by loom on 04.05.15.
  */
-public class ThymeLeafResourceResolver implements IResourceResolver {
+class ThymeLeafResourceResolver implements IResourceResolver {
 
-    public static final String NAME = "JAHIA";
+    private static final String NAME = "JAHIA";
 
     private Map<String,String> scripts = new ConcurrentHashMap<String, String>();
 
@@ -25,11 +24,11 @@ public class ThymeLeafResourceResolver implements IResourceResolver {
         return NAME;
     }
 
-    public String putScript(String scriptName, String scriptSourceCode) {
+    String putScript(String scriptName, String scriptSourceCode) {
         return scripts.put(scriptName, scriptSourceCode);
     }
 
-    public String removeScript(String scriptName) {
+    String removeScript(String scriptName) {
         return scripts.remove(scriptName);
     }
 
