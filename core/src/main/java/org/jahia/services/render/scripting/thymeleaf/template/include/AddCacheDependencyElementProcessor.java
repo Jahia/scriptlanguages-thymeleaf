@@ -1,10 +1,10 @@
 package org.jahia.services.render.scripting.thymeleaf.template.include;
 
 import org.apache.commons.lang.StringUtils;
+import org.jahia.modules.render.scripting.services.template.include.AddCacheDependencyService;
 import org.jahia.services.content.JCRNodeWrapper;
-import org.jahia.services.render.scripting.thymeleaf.ScriptingConstants;
+import org.jahia.services.render.scripting.thymeleaf.DXDialectConstants;
 import org.jahia.services.render.scripting.thymeleaf.ThymeLeafContext;
-import org.jahia.services.render.scripting.thymeleaf.core.template.include.AddCacheDependencyService;
 import org.jahia.services.render.scripting.thymeleaf.util.ProcessorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,11 +38,11 @@ public class AddCacheDependencyElementProcessor extends AbstractNoOpElementProce
     @Override
     protected boolean removeHostElement(final Arguments arguments, final Element element) {
         final ThymeLeafContext context = (ThymeLeafContext) arguments.getContext();
-        final String uuid = element.getAttributeValue(ScriptingConstants
+        final String uuid = element.getAttributeValue(DXDialectConstants
                 .DX_ATTR_UUID);
-        final String stringDependency = element.getAttributeValue(ScriptingConstants
+        final String stringDependency = element.getAttributeValue(DXDialectConstants
                 .DX_ATTR_STRING_DEPENDENCY);
-        final String flushOnPathMatchingRegexp = element.getAttributeValue(ScriptingConstants
+        final String flushOnPathMatchingRegexp = element.getAttributeValue(DXDialectConstants
                 .DX_ATTR_FLUSH_ON_PATH_MATCHING_REGEXP);
 
         final Configuration configuration = arguments.getConfiguration();

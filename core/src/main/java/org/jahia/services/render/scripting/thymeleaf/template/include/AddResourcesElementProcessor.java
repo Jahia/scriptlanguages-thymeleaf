@@ -1,8 +1,8 @@
 package org.jahia.services.render.scripting.thymeleaf.template.include;
 
-import org.jahia.services.render.scripting.thymeleaf.ScriptingConstants;
+import org.jahia.modules.render.scripting.services.template.include.AddResourceService;
+import org.jahia.services.render.scripting.thymeleaf.DXDialectConstants;
 import org.jahia.services.render.scripting.thymeleaf.ThymeLeafContext;
-import org.jahia.services.render.scripting.thymeleaf.core.template.include.AddResourceService;
 import org.jahia.services.render.scripting.thymeleaf.util.ProcessorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,14 +29,14 @@ public class AddResourcesElementProcessor extends AbstractUnescapedTextChildModi
     @Override
     protected String getText(final Arguments arguments, final Element element) {
         final ThymeLeafContext context = (ThymeLeafContext) arguments.getContext();
-        final String type = element.getAttributeValue(ScriptingConstants.DX_ATTR_TYPE);
-        final String resources = element.getAttributeValue(ScriptingConstants.DX_ATTR_RESOURCES);
-        final String title = element.getAttributeValue(ScriptingConstants.DX_ATTR_TITLE);
-        final String key = element.getAttributeValue(ScriptingConstants.DX_ATTR_KEY);
-        final String targetTag = element.getAttributeValue(ScriptingConstants.DX_ATTR_TARGET_TAG);
-        final String rel = element.getAttributeValue(ScriptingConstants.DX_ATTR_REL);
-        final String media = element.getAttributeValue(ScriptingConstants.DX_ATTR_MEDIA);
-        final String condition = element.getAttributeValue(ScriptingConstants.DX_ATTR_CONDITION);
+        final String type = element.getAttributeValue(DXDialectConstants.DX_ATTR_TYPE);
+        final String resources = element.getAttributeValue(DXDialectConstants.DX_ATTR_RESOURCES);
+        final String title = element.getAttributeValue(DXDialectConstants.DX_ATTR_TITLE);
+        final String key = element.getAttributeValue(DXDialectConstants.DX_ATTR_KEY);
+        final String targetTag = element.getAttributeValue(DXDialectConstants.DX_ATTR_TARGET_TAG);
+        final String rel = element.getAttributeValue(DXDialectConstants.DX_ATTR_REL);
+        final String media = element.getAttributeValue(DXDialectConstants.DX_ATTR_MEDIA);
+        final String condition = element.getAttributeValue(DXDialectConstants.DX_ATTR_CONDITION);
         final StringBuilder bodyContent = new StringBuilder();
         if (element.hasChildren()) {
             for (final Node node : element.getChildren()) {
@@ -45,7 +45,7 @@ public class AddResourcesElementProcessor extends AbstractUnescapedTextChildModi
         }
 
         final Map<String, Attribute> attributeMap = element.getAttributeMap();
-        final boolean insert = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_INSERT, false);
+        final boolean insert = ProcessorUtil.getBooleanValue(element, attributeMap, DXDialectConstants.DX_ATTR_INSERT, false);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("insert is {}", insert);

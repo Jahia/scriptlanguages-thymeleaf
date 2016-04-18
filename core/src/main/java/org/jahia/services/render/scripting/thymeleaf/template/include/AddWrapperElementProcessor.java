@@ -1,8 +1,8 @@
 package org.jahia.services.render.scripting.thymeleaf.template.include;
 
-import org.jahia.services.render.scripting.thymeleaf.ScriptingConstants;
+import org.jahia.modules.render.scripting.services.template.include.AddWrapperService;
+import org.jahia.services.render.scripting.thymeleaf.DXDialectConstants;
 import org.jahia.services.render.scripting.thymeleaf.ThymeLeafContext;
-import org.jahia.services.render.scripting.thymeleaf.core.template.include.AddWrapperService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.thymeleaf.Arguments;
@@ -23,7 +23,7 @@ public class AddWrapperElementProcessor extends AbstractNoOpElementProcessor {
     @Override
     protected boolean removeHostElement(final Arguments arguments, final Element element) {
         final ThymeLeafContext context = (ThymeLeafContext) arguments.getContext();
-        final String name = element.getAttributeValue(ScriptingConstants.DX_ATTR_NAME);
+        final String name = element.getAttributeValue(DXDialectConstants.DX_ATTR_NAME);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("name is {}", name);

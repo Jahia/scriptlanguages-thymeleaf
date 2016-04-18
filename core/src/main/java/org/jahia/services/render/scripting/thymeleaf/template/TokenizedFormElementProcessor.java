@@ -1,8 +1,8 @@
 package org.jahia.services.render.scripting.thymeleaf.template;
 
-import org.jahia.services.render.scripting.thymeleaf.ScriptingConstants;
+import org.jahia.modules.render.scripting.services.template.TokenizedFormService;
+import org.jahia.services.render.scripting.thymeleaf.DXDialectConstants;
 import org.jahia.services.render.scripting.thymeleaf.ThymeLeafContext;
-import org.jahia.services.render.scripting.thymeleaf.core.template.TokenizedFormService;
 import org.jahia.services.render.scripting.thymeleaf.util.ProcessorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +32,9 @@ public class TokenizedFormElementProcessor extends AbstractUnescapedTextChildMod
         final Map<String, Attribute> attributeMap = element.getAttributeMap();
 
         final boolean disableXSSFiltering = ProcessorUtil.getBooleanValue(element, attributeMap,
-                ScriptingConstants.DX_ATTR_DISABLE_XSS_FILTERING, false);
+                DXDialectConstants.DX_ATTR_DISABLE_XSS_FILTERING, false);
         final boolean allowsMultipleSubmits = ProcessorUtil.getBooleanValue(element, attributeMap,
-                ScriptingConstants.DX_ATTR_ALLOW_MULTIPLE_SUBMITS, false);
+                DXDialectConstants.DX_ATTR_ALLOW_MULTIPLE_SUBMITS, false);
         final StringBuilder bodyContent = new StringBuilder();
         if (element.hasChildren()) {
             for (final Node node : element.getChildren()) {

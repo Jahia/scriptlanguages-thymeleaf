@@ -2,17 +2,13 @@ package org.jahia.services.render.scripting.thymeleaf.util;
 
 import org.jahia.services.content.JCRNodeWrapper;
 import org.jahia.services.content.decorator.JCRSiteNode;
-import org.jahia.services.render.scripting.thymeleaf.ScriptingConstants;
+import org.jahia.services.render.scripting.thymeleaf.DXDialectConstants;
 import org.thymeleaf.Arguments;
 import org.thymeleaf.Configuration;
 import org.thymeleaf.dom.Attribute;
 import org.thymeleaf.dom.Element;
 import org.thymeleaf.exceptions.TemplateProcessingException;
-import org.thymeleaf.standard.expression.Assignation;
-import org.thymeleaf.standard.expression.AssignationSequence;
-import org.thymeleaf.standard.expression.AssignationUtils;
-import org.thymeleaf.standard.expression.IStandardExpression;
-import org.thymeleaf.standard.expression.IStandardExpressionParser;
+import org.thymeleaf.standard.expression.*;
 import org.thymeleaf.util.StringUtils;
 
 import java.util.Collections;
@@ -110,8 +106,8 @@ public final class ProcessorUtil {
                                                    final Map<String, Attribute> attributeMap,
                                                    final Configuration configuration,
                                                    final IStandardExpressionParser parser) {
-        if (attributeMap.containsKey(ScriptingConstants.DX_ATTR_NODE)) {
-            final String attributeValue = element.getAttributeValue(ScriptingConstants.DX_ATTR_NODE);
+        if (attributeMap.containsKey(DXDialectConstants.DX_ATTR_NODE)) {
+            final String attributeValue = element.getAttributeValue(DXDialectConstants.DX_ATTR_NODE);
             final IStandardExpression expression = parser.parseExpression(configuration, arguments, attributeValue);
             return (JCRNodeWrapper) expression.execute(configuration, arguments);
         } else {
@@ -132,8 +128,8 @@ public final class ProcessorUtil {
                                              final Map<String, Attribute> attributeMap,
                                              final Configuration configuration,
                                              final IStandardExpressionParser parser) {
-        if (attributeMap.containsKey(ScriptingConstants.DX_ATTR_CONTEXT_SITE)) {
-            final String attributeValue = element.getAttributeValue(ScriptingConstants.DX_ATTR_CONTEXT_SITE);
+        if (attributeMap.containsKey(DXDialectConstants.DX_ATTR_CONTEXT_SITE)) {
+            final String attributeValue = element.getAttributeValue(DXDialectConstants.DX_ATTR_CONTEXT_SITE);
             final IStandardExpression expression = parser.parseExpression(configuration, arguments, attributeValue);
             return (JCRSiteNode) expression.execute(configuration, arguments);
         } else {

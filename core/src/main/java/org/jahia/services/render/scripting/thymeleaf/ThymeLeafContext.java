@@ -1,5 +1,6 @@
 package org.jahia.services.render.scripting.thymeleaf;
 
+import org.jahia.modules.render.scripting.services.ScriptingConstants;
 import org.jahia.services.render.RenderContext;
 import org.jahia.services.render.Resource;
 import org.thymeleaf.context.IContext;

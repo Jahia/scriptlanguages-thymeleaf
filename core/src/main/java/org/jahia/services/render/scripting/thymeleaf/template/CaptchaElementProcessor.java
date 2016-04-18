@@ -1,8 +1,8 @@
 package org.jahia.services.render.scripting.thymeleaf.template;
 
-import org.jahia.services.render.scripting.thymeleaf.ScriptingConstants;
+import org.jahia.modules.render.scripting.services.template.CaptchaService;
+import org.jahia.services.render.scripting.thymeleaf.DXDialectConstants;
 import org.jahia.services.render.scripting.thymeleaf.ThymeLeafContext;
-import org.jahia.services.render.scripting.thymeleaf.core.template.CaptchaService;
 import org.jahia.services.render.scripting.thymeleaf.util.ProcessorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,9 +30,9 @@ public class CaptchaElementProcessor extends AbstractUnescapedTextChildModifierE
         final Map<String, Attribute> attributeMap = element.getAttributeMap();
 
         final boolean display = ProcessorUtil.getBooleanValue(element, attributeMap,
-                ScriptingConstants.DX_ATTR_DISPLAY, true);
+                DXDialectConstants.DX_ATTR_DISPLAY, true);
         final boolean displayReloadLink = ProcessorUtil.getBooleanValue(element, attributeMap,
-                ScriptingConstants.DX_ATTR_DISPLAY_RELOAD_LINK, true);
+                DXDialectConstants.DX_ATTR_DISPLAY_RELOAD_LINK, true);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("display is {}", display);

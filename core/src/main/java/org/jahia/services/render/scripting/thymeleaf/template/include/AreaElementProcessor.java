@@ -1,8 +1,9 @@
 package org.jahia.services.render.scripting.thymeleaf.template.include;
 
-import org.jahia.services.render.scripting.thymeleaf.ScriptingConstants;
+import org.jahia.modules.render.scripting.services.ScriptingConstants;
+import org.jahia.modules.render.scripting.services.template.include.AreaService;
+import org.jahia.services.render.scripting.thymeleaf.DXDialectConstants;
 import org.jahia.services.render.scripting.thymeleaf.ThymeLeafContext;
-import org.jahia.services.render.scripting.thymeleaf.core.template.include.AreaService;
 import org.jahia.services.render.scripting.thymeleaf.util.ProcessorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,20 +33,22 @@ public class AreaElementProcessor extends AbstractUnescapedTextChildModifierElem
     @Override
     protected String getText(final Arguments arguments, final Element element) {
         final ThymeLeafContext context = (ThymeLeafContext) arguments.getContext();
-        final String path = element.getAttributeValue(ScriptingConstants.DX_ATTR_PATH);
-        final String view = element.getAttributeValue(ScriptingConstants.DX_ATTR_VIEW);
-        final String templateType = element.getAttributeValue(ScriptingConstants.DX_ATTR_TEMPLATE_TYPE);
-        final String nodeTypes = element.getAttributeValue(ScriptingConstants.DX_ATTR_NODE_TYPES);
-        final String mockupStyle = element.getAttributeValue(ScriptingConstants.DX_ATTR_MOCKUP_STYLE);
+        final String path = element.getAttributeValue(DXDialectConstants.DX_ATTR_PATH);
+        final String view = element.getAttributeValue(DXDialectConstants.DX_ATTR_VIEW);
+        final String templateType = element.getAttributeValue(DXDialectConstants.DX_ATTR_TEMPLATE_TYPE);
+        final String nodeTypes = element.getAttributeValue(DXDialectConstants.DX_ATTR_NODE_TYPES);
+        final String mockupStyle = element.getAttributeValue(DXDialectConstants.DX_ATTR_MOCKUP_STYLE);
 
         final Map<String, Attribute> attributeMap = element.getAttributeMap();
-        final String areaType = ProcessorUtil.getStringValue(element, attributeMap, ScriptingConstants.DX_ATTR_AREA_TYPE, ScriptingConstants.NT_JNT_CONTENT_LIST);
-        final String moduleType = ProcessorUtil.getStringValue(element, attributeMap, ScriptingConstants.DX_ATTR_MODULE_TYPE, ScriptingConstants.MODULE_TYPE_AREA);
-        final Integer listLimit = ProcessorUtil.getIntegerValue(element, attributeMap, ScriptingConstants.DX_ATTR_LEVEL, -1);
-        final Integer level = ProcessorUtil.getIntegerValue(element, attributeMap, ScriptingConstants.DX_ATTR_LEVEL, null);
-        final boolean areaAsSubNode = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_AREA_AS_SUB_NODE, false);
-        final boolean editable = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_EDITABLE, true);
-        final boolean limitedAbsoluteAreaEdit = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_LIMITED_ABSOLUTE_AREA_EDIT, true);
+        final String areaType = ProcessorUtil.getStringValue(element, attributeMap, DXDialectConstants
+                .DX_ATTR_AREA_TYPE, ScriptingConstants.NT_JNT_CONTENT_LIST);
+        final String moduleType = ProcessorUtil.getStringValue(element, attributeMap, DXDialectConstants
+                .DX_ATTR_MODULE_TYPE, ScriptingConstants.MODULE_TYPE_AREA);
+        final Integer listLimit = ProcessorUtil.getIntegerValue(element, attributeMap, DXDialectConstants.DX_ATTR_LEVEL, -1);
+        final Integer level = ProcessorUtil.getIntegerValue(element, attributeMap, DXDialectConstants.DX_ATTR_LEVEL, null);
+        final boolean areaAsSubNode = ProcessorUtil.getBooleanValue(element, attributeMap, DXDialectConstants.DX_ATTR_AREA_AS_SUB_NODE, false);
+        final boolean editable = ProcessorUtil.getBooleanValue(element, attributeMap, DXDialectConstants.DX_ATTR_EDITABLE, true);
+        final boolean limitedAbsoluteAreaEdit = ProcessorUtil.getBooleanValue(element, attributeMap, DXDialectConstants.DX_ATTR_LIMITED_ABSOLUTE_AREA_EDIT, true);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("path is {}", path);

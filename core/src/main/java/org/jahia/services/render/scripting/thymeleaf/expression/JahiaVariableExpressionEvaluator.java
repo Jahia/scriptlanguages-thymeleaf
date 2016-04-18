@@ -1,10 +1,10 @@
 package org.jahia.services.render.scripting.thymeleaf.expression;
 
-import org.jahia.services.render.scripting.thymeleaf.expression.variables.FacetUtils;
-import org.jahia.services.render.scripting.thymeleaf.expression.variables.FunctionUtils;
-import org.jahia.services.render.scripting.thymeleaf.expression.variables.JCRUtils;
-import org.jahia.services.render.scripting.thymeleaf.expression.variables.UserUtils;
-import org.jahia.services.render.scripting.thymeleaf.expression.variables.WorkflowUtils;
+import org.jahia.modules.render.scripting.services.FunctionUtils;
+import org.jahia.modules.render.scripting.services.UserUtils;
+import org.jahia.modules.render.scripting.services.WorkflowUtils;
+import org.jahia.modules.render.scripting.services.facet.FacetUtils;
+import org.jahia.modules.render.scripting.services.jcr.JCRUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.thymeleaf.context.IProcessingContext;

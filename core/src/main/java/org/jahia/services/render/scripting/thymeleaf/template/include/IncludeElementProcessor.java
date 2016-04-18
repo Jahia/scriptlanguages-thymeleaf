@@ -1,9 +1,9 @@
 package org.jahia.services.render.scripting.thymeleaf.template.include;
 
+import org.jahia.modules.render.scripting.services.template.include.IncludeService;
 import org.jahia.services.content.JCRNodeWrapper;
-import org.jahia.services.render.scripting.thymeleaf.ScriptingConstants;
+import org.jahia.services.render.scripting.thymeleaf.DXDialectConstants;
 import org.jahia.services.render.scripting.thymeleaf.ThymeLeafContext;
-import org.jahia.services.render.scripting.thymeleaf.core.template.include.IncludeService;
 import org.jahia.services.render.scripting.thymeleaf.util.ProcessorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,14 +31,14 @@ public class IncludeElementProcessor extends AbstractUnescapedTextChildModifierE
     @Override
     protected String getText(final Arguments arguments, final Element element) {
         final ThymeLeafContext context = (ThymeLeafContext) arguments.getContext();
-        final String view = element.getAttributeValue(ScriptingConstants.DX_ATTR_VIEW);
-        final String templateType = element.getAttributeValue(ScriptingConstants.DX_ATTR_TEMPLATE_TYPE);
+        final String view = element.getAttributeValue(DXDialectConstants.DX_ATTR_VIEW);
+        final String templateType = element.getAttributeValue(DXDialectConstants.DX_ATTR_TEMPLATE_TYPE);
 
         final Map<String, Attribute> attributeMap = element.getAttributeMap();
         final Configuration configuration = arguments.getConfiguration();
         final IStandardExpressionParser parser = StandardExpressions.getExpressionParser(configuration);
         final JCRNodeWrapper node = ProcessorUtil.getJcrNodeWrapper(arguments, element, attributeMap, configuration, parser);
-        final Map<String, String> parameters = ProcessorUtil.getParameter(arguments, element, ScriptingConstants.DX_ATTR_PARAMS);
+        final Map<String, String> parameters = ProcessorUtil.getParameter(arguments, element, DXDialectConstants.DX_ATTR_PARAMS);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("view is {}", view);
