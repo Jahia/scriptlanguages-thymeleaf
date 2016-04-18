@@ -36,8 +36,8 @@ public class ListElementProcessor extends AbstractUnescapedTextChildModifierElem
         final String nodeTypes = element.getAttributeValue(ScriptingConstants.DX_ATTR_NODE_TYPES);
 
         final Map<String, Attribute> attributeMap = element.getAttributeMap();
-        final String listType = ProcessorUtil.getStringValue(element, attributeMap, ScriptingConstants.DX_ATTR_LIST_TYPE, ScriptingConstants.NT_JNT_CONTENT_LIST);
-        final boolean editable = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_EDITABLE, true);
+        final String listType = ProcessorUtil.getStringValue(element, attributeMap, ScriptingConstants.DX_ATTR_LIST_TYPE, ScriptingConstants.DEFAULT_NT_JNT_CONTENT_LIST);
+        final boolean editable = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_EDITABLE, ScriptingConstants.DEFAULT_EDITABLE);
 
         final Configuration configuration = arguments.getConfiguration();
         final IStandardExpressionParser parser = StandardExpressions.getExpressionParser(configuration);

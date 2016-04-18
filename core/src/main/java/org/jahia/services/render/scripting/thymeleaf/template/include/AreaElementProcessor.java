@@ -39,13 +39,13 @@ public class AreaElementProcessor extends AbstractUnescapedTextChildModifierElem
         final String mockupStyle = element.getAttributeValue(ScriptingConstants.DX_ATTR_MOCKUP_STYLE);
 
         final Map<String, Attribute> attributeMap = element.getAttributeMap();
-        final String areaType = ProcessorUtil.getStringValue(element, attributeMap, ScriptingConstants.DX_ATTR_AREA_TYPE, ScriptingConstants.NT_JNT_CONTENT_LIST);
-        final String moduleType = ProcessorUtil.getStringValue(element, attributeMap, ScriptingConstants.DX_ATTR_MODULE_TYPE, ScriptingConstants.MODULE_TYPE_AREA);
-        final Integer listLimit = ProcessorUtil.getIntegerValue(element, attributeMap, ScriptingConstants.DX_ATTR_LEVEL, -1);
-        final Integer level = ProcessorUtil.getIntegerValue(element, attributeMap, ScriptingConstants.DX_ATTR_LEVEL, null);
-        final boolean areaAsSubNode = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_AREA_AS_SUB_NODE, false);
-        final boolean editable = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_EDITABLE, true);
-        final boolean limitedAbsoluteAreaEdit = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_LIMITED_ABSOLUTE_AREA_EDIT, true);
+        final String areaType = ProcessorUtil.getStringValue(element, attributeMap, ScriptingConstants.DX_ATTR_AREA_TYPE, ScriptingConstants.DEFAULT_NT_JNT_CONTENT_LIST);
+        final String moduleType = ProcessorUtil.getStringValue(element, attributeMap, ScriptingConstants.DX_ATTR_MODULE_TYPE, ScriptingConstants.DEFAULT_MODULE_TYPE_AREA);
+        final Integer listLimit = ProcessorUtil.getIntegerValue(element, attributeMap, ScriptingConstants.DX_ATTR_LEVEL, ScriptingConstants.DEFAULT_LIST_LIMIT);
+        final Integer level = ProcessorUtil.getIntegerValue(element, attributeMap, ScriptingConstants.DX_ATTR_LEVEL, ScriptingConstants.DEFAULT_LEVEL);
+        final boolean areaAsSubNode = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_AREA_AS_SUB_NODE, ScriptingConstants.DEFAULT_AREA_AS_SUB_NODE);
+        final boolean editable = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_EDITABLE, ScriptingConstants.DEFAULT_EDITABLE);
+        final boolean limitedAbsoluteAreaEdit = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_LIMITED_ABSOLUTE_AREA_EDIT, ScriptingConstants.DEFAULT_LIMITED_ABSOLUTE_AREA_EDIT);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("path is {}", path);

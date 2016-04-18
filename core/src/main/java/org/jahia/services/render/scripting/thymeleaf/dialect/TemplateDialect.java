@@ -1,6 +1,5 @@
 package org.jahia.services.render.scripting.thymeleaf.dialect;
 
-import org.jahia.services.render.scripting.thymeleaf.expression.JahiaVariableExpressionEvaluator;
 import org.jahia.services.render.scripting.thymeleaf.template.include.AddCacheDependencyElementProcessor;
 import org.jahia.services.render.scripting.thymeleaf.template.include.AddResourcesElementProcessor;
 import org.jahia.services.render.scripting.thymeleaf.template.include.AddWrapperElementProcessor;
@@ -10,11 +9,8 @@ import org.jahia.services.render.scripting.thymeleaf.template.include.ModuleElem
 import org.thymeleaf.dialect.AbstractDialect;
 import org.thymeleaf.processor.IProcessor;
 import org.thymeleaf.standard.expression.IStandardVariableExpressionEvaluator;
-import org.thymeleaf.standard.expression.StandardExpressions;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -31,7 +27,7 @@ public class TemplateDialect extends AbstractDialect {
 
     @Override
     public Set<IProcessor> getProcessors() {
-        final Set<IProcessor> processors = new HashSet<IProcessor>();
+        final Set<IProcessor> processors = new HashSet<IProcessor>(6);
         processors.add(new AreaElementProcessor());
         processors.add(new ModuleElementProcessor());
         processors.add(new AddCacheDependencyElementProcessor());
@@ -40,21 +36,5 @@ public class TemplateDialect extends AbstractDialect {
         processors.add(new IncludeElementProcessor());
         
         return processors;
-    }
-
-    @Override
-    public Map<String, Object> getExecutionAttributes() {
-        final Map<String,Object> executionAttributes = new HashMap<String, Object>(5, 1.0f);
-        executionAttributes.put(
-                StandardExpressions.STANDARD_VARIABLE_EXPRESSION_EVALUATOR_ATTRIBUTE_NAME,
-                getVariableExpressionEvaluator());
-        return executionAttributes;
-    }
-
-    public IStandardVariableExpressionEvaluator getVariableExpressionEvaluator() {
-        if (this.variableExpressionEvaluator == null) {
-            this.variableExpressionEvaluator = JahiaVariableExpressionEvaluator.getInstance();
-        }
-        return this.variableExpressionEvaluator;
     }
 }

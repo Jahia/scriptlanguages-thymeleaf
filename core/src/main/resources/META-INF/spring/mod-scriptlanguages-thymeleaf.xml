@@ -10,4 +10,7 @@
     <bean id="templateThymeleafDialect" class="org.jahia.services.render.scripting.thymeleaf.dialect.TemplateDialect" />
     <osgi:service id="templateThymeleafDialectOsgiService" ref="templateThymeleafDialect" interface="org.thymeleaf.dialect.IDialect" />
 
+    <bean id="generalThymeleafDialect" class="org.jahia.services.render.scripting.thymeleaf.dialect.GeneralDialect" />
+    <osgi:service id="generalThymeleafDialectOsgiService" ref="generalThymeleafDialect" interface="org.thymeleaf.dialect.IDialect" />
+
 </beans>

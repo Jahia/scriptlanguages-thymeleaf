@@ -35,7 +35,7 @@ public class FacetUtils {
     private static final Pattern FACET_PARAM_DELIM_PATTERN = Pattern.compile(FACET_PARAM_DELIM);
     private static final String FACET_DELIM = "|||";
     private static final String FACET_NODE_TYPE = "jnt:facet";
-    public static final String ESCAPED_FACET_DELIM = "\\|\\|\\|";
+    private static final String ESCAPED_FACET_DELIM = "\\|\\|\\|";
     private static final Pattern FILTER_STRING_PATTERN = Pattern.compile(ESCAPED_FACET_DELIM);
 
     public FacetUtils() {

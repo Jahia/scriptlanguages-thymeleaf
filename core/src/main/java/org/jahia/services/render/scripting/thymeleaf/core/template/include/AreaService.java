@@ -34,11 +34,11 @@ public class AreaService extends ModuleService {
     private String conflictsWith = null;
 
     private String areaType;
-    private String moduleType = "area";
+    private String moduleType;
     private String mockupStyle;
     private Integer level;
     private boolean areaAsSubNode;
-    private boolean limitedAbsoluteAreaEdit = true;
+    private boolean limitedAbsoluteAreaEdit;
 
     /**
      * @param renderContext
@@ -146,7 +146,7 @@ public class AreaService extends ModuleService {
             if (conflictsWith != null) {
                 additionalParameters.append(" conflictsWith=\"").append(conflictsWith).append("\"");
             }
-            if (!areaType.equals(ScriptingConstants.NT_JNT_CONTENT_LIST)) {
+            if (!areaType.equals(ScriptingConstants.DEFAULT_NT_JNT_CONTENT_LIST)) {
                 additionalParameters.append(" areaType=\"").append(areaType).append("\"");
             }
 

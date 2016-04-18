@@ -34,7 +34,7 @@ public class JahiaVariableExpressionEvaluator extends OgnlVariableExpressionEval
     protected Map<String, Object> computeAdditionalContextVariables(final IProcessingContext processingContext) {
         LOGGER.debug("Loading Jahia Context Variables");
 
-        final Map<String, Object> variables = new HashMap<String, Object>();
+        final Map<String, Object> variables = new HashMap<String, Object>(5);
         variables.put(FACET, new FacetUtils());
         variables.put(JCR, new JCRUtils());
         variables.put(USER, new UserUtils());

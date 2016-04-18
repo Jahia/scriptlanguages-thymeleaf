@@ -57,10 +57,17 @@ public class ScriptingConstants {
     public static final String MIX_JMIX_LIST_CONTENT = "jmix:listContent";
 
     public static final String NT_JNT_TEMPLATE = "jnt:template";
-    public static final String NT_JNT_CONTENT_LIST = "jnt:contentList";
     public static final String NT_JNT_CONTENT_REFERENCE = "jnt:contentReference";
 
-    public static final String MODULE_TYPE_AREA = "area";
+    public static final String DEFAULT_MODULE_TYPE_AREA = "area";
+    public static final String DEFAULT_NT_JNT_CONTENT_LIST = "jnt:contentList";
+    public static final boolean DEFAULT_AREA_AS_SUB_NODE = false;
+    public static final boolean DEFAULT_EDITABLE = true;
+    public static final boolean DEFAULT_LIMITED_ABSOLUTE_AREA_EDIT = true;
+    public static final int DEFAULT_LIST_LIMIT = -1;
+    public static final Integer DEFAULT_LEVEL = null;
+    public static final boolean DEFAULT_INSERT = false;
+
     public static final String MODULE_TYPE_ABSOLUTE_AREA = "absoluteArea";
     public static final String MODULE_TYPE_LIST = "list";
 

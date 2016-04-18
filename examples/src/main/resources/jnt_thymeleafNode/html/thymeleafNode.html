@@ -20,7 +20,6 @@
       console.log("inline");
     </script>
   </dx-template:add-resources>
-This is a test.
   <div class="blankStyle">Test</div>
   <dx-template:area dx:path="home"/>
 
@@ -42,4 +41,25 @@ This is a test.
   <div th:with="firstName=Sam">
     <div th:text="${firstName}">Jordan</div>
   </div>
+
+  <dx:script>
+    var name = "momin 123123";
+    var renderedHtml = "test";
+    var title = "Ny Title";
+    var clientItems = "item1";
+  </dx:script>
+  <div th:with="firstName=Sam">
+  my name is: <span th:text="${nashornGlobal.name}">Smith</span>
+    <div th:text="${nashornGlobal['funcTest']}">Smith</div>
+  </div>
+  <div id="comments-content" th:utext="${nashornGlobal.renderedHtml}"></div>
+  <script type="text/javascript" th:inline="javascript">
+    $(function () {
+      var title = /*[[${nashornGlobal.title}]]*/ null;
+      var clientItems = /*[[${nashornGlobal.clientItems}]]*/ "";
+      var identifier = /*[[${currentNode.identifier}]]*/ null;
+      var workspace = /*[[${workspace}]]*/ null;
+      console.log(title, [clientItems], identifier, workspace);
+    });
+  </script>
 </div>

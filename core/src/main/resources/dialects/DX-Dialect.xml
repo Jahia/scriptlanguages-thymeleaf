@@ -152,6 +152,9 @@
         <restrictions tags="template:add-wrapper"/>
     </attribute-processor>
 
+    <element-processor name="script"
+                       class="org.jahia.services.render.scripting.thymeleaf.script.JavaScriptElementProcessor"/>
+
 
     <!-- Jahia DX Thymeleaf element processors -->
     <!-- ======================================= -->

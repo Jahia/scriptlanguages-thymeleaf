@@ -45,7 +45,7 @@ public class AddResourcesElementProcessor extends AbstractUnescapedTextChildModi
         }
 
         final Map<String, Attribute> attributeMap = element.getAttributeMap();
-        final boolean insert = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_INSERT, false);
+        final boolean insert = ProcessorUtil.getBooleanValue(element, attributeMap, ScriptingConstants.DX_ATTR_INSERT, ScriptingConstants.DEFAULT_INSERT);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("insert is {}", insert);
