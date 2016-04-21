@@ -100,13 +100,12 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
+                        <Jahia-Depends>scriptlanguages-services</Jahia-Depends>
                         <Export-Package>
                             org.jahia.services.render.scripting.thymeleaf,
                             org.thymeleaf.*
                         </Export-Package>
-                        <Import-Package>
-                            org.jahia.modules.render.scripting.services
-                        </Import-Package>
+                        <DynamicImport-Package>*</DynamicImport-Package>
                     </instructions>
                 </configuration>
             </plugin>
