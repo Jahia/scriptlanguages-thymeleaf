@@ -1,6 +1,8 @@
 # scriptlanguages-thymeleaf
 
-A experimental module that provides basic Thymeleaf scripting language support. This module hasn't gone through Jahia's rigorous QA process and is therefore not supported.
+A Jahia Digital Experience Manager (DX) module that provides Thymeleaf scripting language support. This module 
+should mostly be considered as a proof-of-concept. It is not recommended to use this code in a production environment.
+For more information about Jahia DX, please go to: https://www.jahia.com/platform/digital-experience-manager
 
 ## Features
 - Makes it possible to use Thymeleaf as a scripting languages for Jahia views

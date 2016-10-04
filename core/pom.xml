@@ -43,7 +43,9 @@
     <artifactId>scriptlanguages-thymeleaf</artifactId>
     <name>Thymeleaf Script Language integration core module</name>
     <packaging>bundle</packaging>
-    <description>This module provides an integration of the Thymeleaf language as a scripting language for Jahia</description>
+    <description>
+        This module provides an integration of the Thymeleaf language as a scripting language for Jahia DX
+    </description>
 
     <dependencies>
         <dependency>

@@ -43,7 +43,9 @@
     <artifactId>scriptlanguages-thymeleaf-examples</artifactId>
     <name>Thymeleaf Script Language integration example module</name>
     <packaging>bundle</packaging>
-    <description>This module provides examples of usage of the Thymeleaf language as a scripting language for Jahia</description>
+    <description>
+        This module provides examples of usage of the Thymeleaf language as a scripting language for Jahia DX
+    </description>
 
     <dependencies>
         <dependency>
