@@ -46,6 +46,10 @@
     <packaging>pom</packaging>
     <description>This is the root project for the Thymeleaf scripting language support in Jahia</description>
 
+    <properties>
+        <thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
+    </properties>
+
     <scm>
         <connection>scm:git:git@github.com:Jahia/scriptlanguages-thymeleaf.git</connection>
         <developerConnection>scm:git:git@github.com:Jahia/scriptlanguages-thymeleaf.git</developerConnection>
