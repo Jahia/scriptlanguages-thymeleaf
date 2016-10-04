@@ -94,6 +94,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
+                        <Jahia-Module-Type>system</Jahia-Module-Type>
                         <Export-Package>org.thymeleaf.*</Export-Package>
                     </instructions>
                 </configuration>
