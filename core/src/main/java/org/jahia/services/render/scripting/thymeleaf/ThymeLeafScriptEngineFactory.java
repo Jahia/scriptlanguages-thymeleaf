@@ -1,5 +1,11 @@
 package org.jahia.services.render.scripting.thymeleaf;
 
+import org.jahia.services.render.scripting.bundle.Configurable;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+import org.osgi.util.tracker.ServiceTracker;
+import org.osgi.util.tracker.ServiceTrackerCustomizer;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.messageresolver.IMessageResolver;
@@ -15,8 +21,8 @@ import java.util.Map;
 /**
  * Created by loom on 04.05.15.
  */
-public class ThymeLeafScriptEngineFactory implements ScriptEngineFactory {
-
+public class ThymeLeafScriptEngineFactory implements ScriptEngineFactory, Configurable {
+    private ServiceTracker<IDialect, IDialect> dialectServiceTracker;
     private TemplateEngine templateEngine;
     private final ThymeLeafResourceResolver thymeLeafResourceResolver = new ThymeLeafResourceResolver();
 
@@ -126,5 +132,46 @@ public class ThymeLeafScriptEngineFactory implements ScriptEngineFactory {
 
     public void removeDialect(String dialectPrefix) {
         additionalDialects.remove(dialectPrefix);
+    }
+
+    @Override
+    public void configurePreRegistration(Bundle bundle) {
+        final BundleContext bundleContext = bundle.getBundleContext();
+
+        ServiceTrackerCustomizer<IDialect, IDialect> serviceTrackerCustomizer = new ServiceTrackerCustomizer<IDialect, IDialect>() {
+            @Override
+            public IDialect addingService(ServiceReference reference) {
+                IDialect addedDialect = (IDialect) bundleContext.getService(reference);
+                addDialect(addedDialect);
+                initializeTemplateEngine();
+                return addedDialect;
+            }
+
+            @Override
+            public void modifiedService(ServiceReference reference, IDialect service) {
+
+            }
+
+            @Override
+            public void removedService(ServiceReference reference, IDialect service) {
+                if (service != null) {
+                    removeDialect(service.getPrefix());
+                }
+                initializeTemplateEngine();
+            }
+        };
+
+        dialectServiceTracker = new ServiceTracker<>(bundleContext, IDialect.class, serviceTrackerCustomizer);
+        dialectServiceTracker.open();
+    }
+
+    @Override
+    public void destroy(Bundle bundle) {
+        dialectServiceTracker.close();
+    }
+
+    @Override
+    public void configurePreScriptEngineCreation() {
+
     }
 }
